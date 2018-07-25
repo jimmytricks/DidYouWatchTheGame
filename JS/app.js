@@ -20,10 +20,13 @@ nextGame.onreadystatechange = function() {
         // parse response into empty object
         var nextGameObject = {};
         nextGameObject = JSON.parse(nextGame.response);
+
+        document.getElementById("next-vs").innerHTML = nextGameObject.dates["0"].games["0"].gameDate;
+        document.getElementById("next-date").innerHTML = nextGameObject.dates["0"].games["0"].teams.away.team.name;
         debugger;
 
 
-       document.getElementById("next-fixture").innerHTML = nextGame.responseText;
+    //    document.getElementById("next-fixture").innerHTML = nextGame.responseText;
     }
 };
 nextGame.open("GET", concatApiString, true);
