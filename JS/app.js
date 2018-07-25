@@ -21,8 +21,17 @@ nextGame.onreadystatechange = function() {
         var nextGameObject = {};
         nextGameObject = JSON.parse(nextGame.response);
 
-        document.getElementById("next-vs").innerHTML = nextGameObject.dates["0"].games["0"].gameDate;
-        document.getElementById("next-date").innerHTML = nextGameObject.dates["0"].games["0"].teams.away.team.name;
+        // set date and format to local time
+        var nextGameLocalDate = new Date(nextGameObject.dates["0"].games["0"].gameDate)
+        nextGameLocalDate.toLocaleDateString();
+        
+        // set local date
+        document.getElementById("next-date").innerHTML = nextGameLocalDate;
+
+        // set opponents
+        document.getElementById("next-home").innerHTML = nextGameObject.dates["0"].games["0"].teams.home.team.name;
+        document.getElementById("next-away").innerHTML = nextGameObject.dates["0"].games["0"].teams.away.team.name;
+
         debugger;
 
 
