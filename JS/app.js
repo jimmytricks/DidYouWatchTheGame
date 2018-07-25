@@ -22,8 +22,8 @@ nextGame.onreadystatechange = function() {
         nextGameObject = JSON.parse(nextGame.response);
 
         // set date and format to local time
-        var nextGameLocalDate = new Date(nextGameObject.dates["0"].games["0"].gameDate)
-        nextGameLocalDate.toLocaleDateString();
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+        var nextGameLocalDate = new Date(nextGameObject.dates["0"].games["0"].gameDate).toLocaleDateString('en', options);
         
         // set local date
         document.getElementById("next-date").innerHTML = nextGameLocalDate;
