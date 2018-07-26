@@ -21,15 +21,13 @@ function getLatestFixtures() {
             var nextGameObject = {};
             nextGameObject = JSON.parse(nextGame.response);
 
-            // set date and format to local time
+
             function createGameDate(game) {
 
+                // format date 
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
                 var gameDateFormatted = new Date(game.gameDate).toLocaleDateString('en', options);
-                // set local date
-                console.log(game.gameDate)
-                // document.getElementById("next-date").innerHTML = nextGameLocalDate;#
-                
+
                 // create paragraph elements
                 var liNode = document.createElement("p");
                 var liNodeFixture = document.createElement("p");
@@ -48,7 +46,7 @@ function getLatestFixtures() {
                 var liTextNodeFixture = document.createTextNode(listTextStringFixture);
 
                 // add date and fixture text nodes to respect paragraph elements
-                liNode.appendChild(liTextNodeDate);        
+                liNode.appendChild(liTextNodeDate);
                 liNodeFixture.appendChild(liTextNodeFixture);
 
                 // create container div
