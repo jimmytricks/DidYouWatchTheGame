@@ -21,12 +21,37 @@ nextGame.onreadystatechange = function() {
         var nextGameObject = {};
         nextGameObject = JSON.parse(nextGame.response);
 
-        // set date and format to local time
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
-        var nextGameLocalDate = new Date(nextGameObject.dates["0"].games["0"].gameDate).toLocaleDateString('en', options);
+
+        // set date and format to local time
+        function createGameDate(game){
+            var nextGameLocalDate = new Date(game).toLocaleDateString('en', options);
+             // set local date
+             console.log(game.gameDate)
+            // document.getElementById("next-date").innerHTML = nextGameLocalDate;
+            var liNode = document.createElement("li");
+            var listTextString = "";
+            listTextString += game.gameDate;
+            listTextString += game.teams.home.team.name;
+            listTextString += " vs ";
+            listTextString += game.teams.away.team.name;
+            
+            var liTextNode = document.createTextNode(listTextString);
+            liNode.appendChild(liTextNode);
+            document.getElementById('next-fixture').appendChild(liNode);
+
+            
+        }
+       
         
-        // set local date
-        document.getElementById("next-date").innerHTML = nextGameLocalDate;
+        // createGameDate(nextGameObject.dates["0"].games["0"].gameDate, options);
+        var game1 = nextGameObject.dates["1"].games["0"];
+        var game2 = nextGameObject.dates["2"].games["0"];
+        var game3 = nextGameObject.dates["3"].games["0"];
+        var game4 = nextGameObject.dates["4"].games["0"];
+        var remainingNextFourGames = [game1,game2,game3,game4];
+
+        remainingNextFourGames.forEach(createGameDate);
 
         // set opponents
         document.getElementById("next-home").innerHTML = nextGameObject.dates["0"].games["0"].teams.home.team.name;
