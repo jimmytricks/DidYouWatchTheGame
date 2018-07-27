@@ -21,7 +21,7 @@ function getLatestFixtures() {
             var nextGameObject = {};
             nextGameObject = JSON.parse(nextGame.response);
 
-
+            // get next 4 fixtures
             function createGameDate(game) {
 
                 // format date 
@@ -59,10 +59,10 @@ function getLatestFixtures() {
             }
 
             // set game variables, run create game date function
-            var game1 = nextGameObject.dates["1"].games["0"];
-            var game2 = nextGameObject.dates["2"].games["0"];
-            var game3 = nextGameObject.dates["3"].games["0"];
-            var game4 = nextGameObject.dates["4"].games["0"];
+            var game1 = nextGameObject.dates["0"].games["0"];
+            var game2 = nextGameObject.dates["1"].games["0"];
+            var game3 = nextGameObject.dates["2"].games["0"];
+            var game4 = nextGameObject.dates["3"].games["0"];
             var nextFourGames = [game1, game2, game3, game4];
             nextFourGames.forEach(createGameDate);
         }
@@ -70,14 +70,9 @@ function getLatestFixtures() {
     nextGame.open("GET", concatApiString, true);
     nextGame.send();
 }
-
 getLatestFixtures();
 
-
-
-// last results
-
-
+// get last 4 results
 function getLatestResults() {
 
     // set date to today'a date
@@ -136,11 +131,13 @@ function getLatestResults() {
                 document.getElementById('last-fixtures').appendChild(gameContainerNode);
             }
 
+            var lastFiveGamesArray = lastGameObject.dates;
+            lastFiveGamesArray = lastFiveGamesArray.slice(-5).reverse();
             // set game variables, run create game date function
-            var game1 = lastGameObject.dates["1"].games["0"];
-            var game2 = lastGameObject.dates["2"].games["0"];
-            var game3 = lastGameObject.dates["3"].games["0"];
-            var game4 = lastGameObject.dates["4"].games["0"];
+            var game1 = lastFiveGamesArray["0"].games["0"];
+            var game2 = lastFiveGamesArray["1"].games["0"];
+            var game3 = lastFiveGamesArray["2"].games["0"];
+            var game4 = lastFiveGamesArray["3"].games["0"];
             var nextFourGames = [game1, game2, game3, game4];
             nextFourGames.forEach(createGameDate);
         }
@@ -150,3 +147,52 @@ function getLatestResults() {
 }
 
 getLatestResults();
+
+
+
+function getPacificTable() {
+
+    var pacificTable = new XMLHttpRequest();
+    pacificTable.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // parse response into empty object
+            var pacificTableObject = {};
+            pacificTableObject = JSON.parse(pacificTable.response);
+
+            // set var for Pacific division, loop through teams
+            var pacificDivisionTeams = pacificTableObject.records[3].teamRecords;                
+            for (i = 0; i < pacificDivisionTeams.length; i++){
+                console.log (pacificDivisionTeams[i]);
+
+                // create list node and text 
+                var pacificTeamNameListItem = document.createElement('li');
+                var pacificTeamTextNode = document.createTextNode(pacificDivisionTeams[i].team.name);
+                console.log(pacificTeamTextNode);
+                pacificTeamNameListItem.appendChild(pacificTeamTextNode);
+                var pacificTableStandingIDString = "pacific-table-";
+                var incrementByOneTogetPosition = 1;
+                incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
+                debugger;
+                pacificTableStandingIDString += incrementByOneTogetPosition;
+                console.log(pacificTableStandingIDString);
+                document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamTextNode);
+
+                // check if team is the canucks
+                if (pacificDivisionTeams[i].team.id == 23 ){
+                    console.log(pacificDivisionTeams[i].team.name)
+                }
+            }
+
+
+            // pacificTableObject > teamRecords (loop through this array) > check if team > ID is canucks, if so append certain class. 
+            // Then log games played, total points. Then log > leagueRecord > wins, losses, OT
+
+            debugger;
+        }
+    }
+
+    pacificTable.open("GET", 'https://statsapi.web.nhl.com/api/v1/standings/byDivision', true);
+    pacificTable.send();
+}
+
+getPacificTable();
