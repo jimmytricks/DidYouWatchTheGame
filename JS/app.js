@@ -164,17 +164,20 @@ function getPacificTable() {
             for (i = 0; i < pacificDivisionTeams.length; i++){
                 console.log (pacificDivisionTeams[i]);
 
-                // create list node and text 
+                // create list node and text, append text to node
                 var pacificTeamNameListItem = document.createElement('li');
                 var pacificTeamTextNode = document.createTextNode(pacificDivisionTeams[i].team.name);
-                console.log(pacificTeamTextNode);
                 pacificTeamNameListItem.appendChild(pacificTeamTextNode);
+
+                // create string to grab league placing IDS
                 var pacificTableStandingIDString = "pacific-table-";
+
+                // increment by one for each league position, force it to a number. Increment one per for loop
                 var incrementByOneTogetPosition = 1;
                 incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
-                debugger;
+
+                //  append the ID number onto table, add text node
                 pacificTableStandingIDString += incrementByOneTogetPosition;
-                console.log(pacificTableStandingIDString);
                 document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamTextNode);
 
                 // check if team is the canucks
@@ -186,8 +189,6 @@ function getPacificTable() {
 
             // pacificTableObject > teamRecords (loop through this array) > check if team > ID is canucks, if so append certain class. 
             // Then log games played, total points. Then log > leagueRecord > wins, losses, OT
-
-            debugger;
         }
     }
 
