@@ -87,6 +87,7 @@ function getLatestResults() {
     var concatApiString = apiStartString.concat(todayDate);
     console.log(concatApiString);
 
+
     var lastGames = new XMLHttpRequest();
     lastGames.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -94,9 +95,8 @@ function getLatestResults() {
             var lastGameObject = {};
             lastGameObject = JSON.parse(lastGames.response);
 
-
             function createGameDate(game) {
-                // debugger;
+            
 
                 // format date 
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -143,6 +143,7 @@ function getLatestResults() {
                 document.getElementById('last-fixtures').appendChild(gameContainerNode);
             }
 
+            
             var lastFiveGamesArray = lastGameObject.dates;
             lastFiveGamesArray = lastFiveGamesArray.slice(-5).reverse();
             // set game variables, run create game date function
@@ -152,6 +153,9 @@ function getLatestResults() {
             var game4 = lastFiveGamesArray["3"].games["0"];
             var nextFourGames = [game1, game2, game3, game4];
             nextFourGames.forEach(createGameDate);
+
+            // run get highlights function
+            nextFourGames.forEach(getHighlights);
         }
     };
     lastGames.open("GET", concatApiString, true);
@@ -159,6 +163,32 @@ function getLatestResults() {
 }
 
 getLatestResults();
+
+// get highlights from last results
+function getHighlights(highlights) {
+
+    // access api link containing highlights info
+    var getContentLink = 'https://statsapi.web.nhl.com' + highlights['content']['link'];
+    console.log(getContentLink);
+
+    var getEachHighlight = new XMLHttpRequest();
+    getEachHighlight.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // parse response into empty object
+            var highlightObject = {};
+            highlightObject = JSON.parse(getEachHighlight.response);
+            console.log(highlightObject);
+            
+            var extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9];
+            console.log(extendedHighlightLink);
+
+
+        }
+    };
+        getEachHighlight.open("GET", getContentLink, true);
+        getEachHighlight.send();
+};
+
 
 
 
