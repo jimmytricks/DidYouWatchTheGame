@@ -96,6 +96,7 @@ function getLatestResults() {
 
 
             function createGameDate(game) {
+                // debugger;
 
                 // format date 
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -104,6 +105,7 @@ function getLatestResults() {
                 // create paragraph elements
                 var liNode = document.createElement("p");
                 var liNodeFixture = document.createElement("p");
+                var liNodeResult = document.createElement("p");
 
                 // create string to go into paragraph elements for both date and fixtures
                 var listTextStringDate = "";
@@ -114,13 +116,21 @@ function getLatestResults() {
                 listTextStringFixture += " vs ";
                 listTextStringFixture += game.teams.away.team.name;
 
+                var listTextStringResult = "";
+                listTextStringResult += game.teams.home.score;
+                listTextStringResult += " - ";
+                listTextStringResult += game.teams.away.score;
+
                 // create text node with date and fixture strings
                 var liTextNodeDate = document.createTextNode(listTextStringDate);
                 var liTextNodeFixture = document.createTextNode(listTextStringFixture);
+                var liTextStringResult = document.createTextNode(listTextStringResult);
 
                 // add date and fixture text nodes to respect paragraph elements
                 liNode.appendChild(liTextNodeDate);
                 liNodeFixture.appendChild(liTextNodeFixture);
+                liNodeResult.appendChild(liTextStringResult);
+
 
                 // create container div
                 var gameContainerNode = document.createElement('div');
@@ -128,6 +138,8 @@ function getLatestResults() {
                 // append paragraph elements to container div and add to page
                 gameContainerNode.appendChild(liNode);
                 gameContainerNode.appendChild(liNodeFixture);
+                gameContainerNode.appendChild(liNodeResult);
+
                 document.getElementById('last-fixtures').appendChild(gameContainerNode);
             }
 
@@ -160,12 +172,17 @@ function getPacificTable() {
             pacificTableObject = JSON.parse(pacificTable.response);
 
             // set var for Pacific division, loop through teams
-            var pacificDivisionTeams = pacificTableObject.records[3].teamRecords;                
-            for (i = 0; i < pacificDivisionTeams.length; i++){
-                console.log (pacificDivisionTeams[i]);
+            var pacificDivisionTeams = pacificTableObject.records[3].teamRecords;
+            for (i = 0; i < pacificDivisionTeams.length; i++) {
 
                 // create list node and text, append text to node
-                var pacificTeamNameListItem = document.createElement('li');
+                var pacificTeamNameListItem = document.createElement('LI');
+
+                // check if team is the canucks, if so add class
+                if (pacificDivisionTeams[i].team.id == 23) {
+                    pacificTeamNameListItem.className = 'canucks-standing';
+                }
+
                 var pacificTeamTextNode = document.createTextNode(pacificDivisionTeams[i].team.name);
                 pacificTeamNameListItem.appendChild(pacificTeamTextNode);
 
@@ -178,17 +195,54 @@ function getPacificTable() {
 
                 //  append the ID number onto table, add text node
                 pacificTableStandingIDString += incrementByOneTogetPosition;
-                document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamTextNode);
+                document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamNameListItem);
 
-                // check if team is the canucks
-                if (pacificDivisionTeams[i].team.id == 23 ){
-                    console.log(pacificDivisionTeams[i].team.name)
+                // add league points to standing table
+                function addLeaguePoints(leaguePoints) {
+
+                    // create list node and text, append text to node
+                    var pacificTeamPointsListItem = document.createElement('LI');
+                    var pacificTeamPointsTextNode = document.createTextNode(pacificDivisionTeams[i][leaguePoints]);
+                    pacificTeamPointsListItem.appendChild(pacificTeamPointsTextNode);
+
+                    // create string to grab league placing IDS
+                    var pacificTableStandingIDString = "pacific-table-";
+
+                    // increment by one for each league position, force it to a number. Increment one per for loop
+                    var incrementByOneTogetPosition = 1;
+                    incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
+
+                    //  append the ID number onto table, add text node
+                    pacificTableStandingIDString += incrementByOneTogetPosition;
+                    document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamPointsListItem);
                 }
+
+                addLeaguePoints('points');
+
+                //  add league stats, wins, losses and OT to table
+                function addLeagueStats(leagueStats) {
+
+                    // create list node and text, append text to node
+                    var pacificTeamPointsListItem = document.createElement('LI');
+                    var pacificTeamPointsTextNode = document.createTextNode(pacificDivisionTeams[i].leagueRecord[leagueStats]);
+                    pacificTeamPointsListItem.appendChild(pacificTeamPointsTextNode);
+
+                    // create string to grab league placing IDS
+                    var pacificTableStandingIDString = "pacific-table-";
+
+                    // increment by one for each league position, force it to a number. Increment one per for loop
+                    var incrementByOneTogetPosition = 1;
+                    incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
+
+                    //  append the ID number onto table, add text node
+                    pacificTableStandingIDString += incrementByOneTogetPosition;
+                    document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamPointsListItem);
+                }
+
+                addLeagueStats('wins');
+                addLeagueStats('losses');
+                addLeagueStats('ot');
             }
-
-
-            // pacificTableObject > teamRecords (loop through this array) > check if team > ID is canucks, if so append certain class. 
-            // Then log games played, total points. Then log > leagueRecord > wins, losses, OT
         }
     }
 
