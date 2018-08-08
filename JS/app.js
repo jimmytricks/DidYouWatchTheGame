@@ -21,8 +21,10 @@ function getLatestFixtures() {
             var nextGameObject = {};
             nextGameObject = JSON.parse(nextGame.response);
 
+
             // get next 4 fixtures
             function createGameDate(game) {
+                
 
                 // format date 
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -45,7 +47,7 @@ function getLatestFixtures() {
                 var liTextNodeDate = document.createTextNode(listTextStringDate);
                 var liTextNodeFixture = document.createTextNode(listTextStringFixture);
 
-                // add date and fixture text nodes to respect paragraph elements
+                // add date and fixture text nodes to respective paragraph elements
                 liNode.appendChild(liTextNodeDate);
                 liNodeFixture.appendChild(liTextNodeFixture);
 
@@ -95,7 +97,13 @@ function getLatestResults() {
             var lastGameObject = {};
             lastGameObject = JSON.parse(lastGames.response);
 
+            // define a last fixture counter, starting on 1 to match html element
+            var lastFixtureCounter = 1;
+
             function createGameDate(game) {
+
+                // increment by one each time it loops
+                lastFixtureCounter + 1;
             
 
                 // format date 
@@ -131,16 +139,17 @@ function getLatestResults() {
                 liNodeFixture.appendChild(liTextNodeFixture);
                 liNodeResult.appendChild(liTextStringResult);
 
-
                 // create container div
-                var gameContainerNode = document.createElement('div');
+                var gameContainerNode = document.createElement('li');
 
                 // append paragraph elements to container div and add to page
                 gameContainerNode.appendChild(liNode);
                 gameContainerNode.appendChild(liNodeFixture);
                 gameContainerNode.appendChild(liNodeResult);
 
-                document.getElementById('last-fixtures').appendChild(gameContainerNode);
+                // create string to grab league placing IDS                
+                var gameContainerNodeIDString = "last-fixture-" + (Number(lastFixtureCounter));               
+                document.getElementById(gameContainerNodeIDString).appendChild(gameContainerNode);
             }
 
             
@@ -159,30 +168,43 @@ function getLatestResults() {
         }
     };
     lastGames.open("GET", concatApiString, true);
+    
     lastGames.send();
 }
 
 getLatestResults();
+
+// set highlight counter to select correct html element
+var lastHighlightCounter = 0;
 
 // get highlights from last results
 function getHighlights(highlights) {
 
     // access api link containing highlights info
     var getContentLink = 'https://statsapi.web.nhl.com' + highlights['content']['link'];
-    console.log(getContentLink);
+
+    // increment counter so each highlight is in correct list item
+    
 
     var getEachHighlight = new XMLHttpRequest();
     getEachHighlight.onreadystatechange = function () {
+        lastHighlightCounter + 1;
         if (this.readyState == 4 && this.status == 200) {
             // parse response into empty object
             var highlightObject = {};
             highlightObject = JSON.parse(getEachHighlight.response);
-            console.log(highlightObject);
             
-            var extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9];
-            console.log(extendedHighlightLink);
+            var extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
 
+            var liHighlightNode = document.createTextNode(extendedHighlightLink);
+            var liHighlightLINode = document.createElement('li');        
 
+            var highlightContainerNodeIDString = "last-fixture-" + (Number(lastHighlightCounter));
+            debugger;
+            liHighlightLINode.appendChild(liHighlightNode);
+          
+                document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightLINode);
+           
         }
     };
         getEachHighlight.open("GET", getContentLink, true);
