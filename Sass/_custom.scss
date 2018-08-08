@@ -2,22 +2,28 @@
 html {
     font-size:$font-size;
     font-family:$font-stack;
+    color:$white;
 }
 
 section {
     padding:20px;
     li {
-        list-style-type: none;;
+        list-style-type: none;
+    }
+    h2 {
+        letter-spacing: 1.5px;
+        padding-bottom:5px;
+        border-bottom: 5px solid rgba($white, 0.5);
     }
 }
 
-.canucks-standing ~ li {  /* for use with styling standing table later */
-    font-weight:900;
-    background-color:$primary-colour;
-}
 .canucks-standing {
+    background-color:$primary-colour;
+    li { 
     font-weight:900;
+    }
 }
+
 
 .wrapper {
     display:grid;
@@ -27,10 +33,11 @@ section {
 #next-fixture {
     background-color:$primary-colour;
     h2 {
-        color:white;
-    }
+        color:$white;
+        letter-spacing: 1.5px;
+        }
     p {
-        color:white;
+        color:$white;
         margin:5px 0;
         &:last-child{
             font-weight:900;
@@ -42,23 +49,42 @@ section {
 }
 
 #last-fixtures {
-    background-color:white;
-    p, li, a {
-        color:$secondary-colour;
+    background-color:$white;
+    color:$secondary-colour;
+    p {
+        margin: 5px 0;
+    }
+    h2 {
+        border-bottom: 5px solid $primary-colour;
+    }
+    a {
+        background-color:$secondary-colour;
+        color:$white;
+        text-decoration: none;
+        padding: 8px;
+        text-transform: uppercase;
+        font-size: 0.9em;
+    }
+    li p {
+        &:nth-child(2){
+            font-weight:900;
+        }
     }
 }
 
 #pacific-table {
     background-color:$secondary-colour;
-    p, li, a, h1, h2 {
-        color:white;
+    p, li {
         font-size:$font-size-smaller;
     }
     ul {
         display: flex;
         padding: 5px;
-        border-bottom: 2px solid white;
+        border-bottom: 1px solid rgba($white, 0.5);
         margin:0;
+        &:nth-child(3){
+           border-bottom:4px solid $white;
+        }
         li {
             padding: 5px;
             min-width: 30px;
@@ -66,7 +92,7 @@ section {
             &:first-child {
                 min-width:25px;
             }
-            &:nth-child(2){
+            &:nth-child(2){ /* team name */
                 min-width:150px;
                 text-align:left;
             }

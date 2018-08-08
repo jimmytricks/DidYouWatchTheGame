@@ -333,6 +333,7 @@ template {
 html {
   font-size: 16px;
   font-family: Roboto, sans-serif;
+  color: white;
 }
 
 section {
@@ -341,14 +342,16 @@ section {
 section li {
   list-style-type: none;
 }
-
-.canucks-standing ~ li {
-  /* for use with styling standing table later */
-  font-weight: 900;
-  background-color: #008852;
+section h2 {
+  letter-spacing: 1.5px;
+  padding-bottom: 5px;
+  border-bottom: 5px solid rgba(255, 255, 255, 0.5);
 }
 
 .canucks-standing {
+  background-color: #008852;
+}
+.canucks-standing li {
   font-weight: 900;
 }
 
@@ -362,6 +365,7 @@ section li {
 }
 #next-fixture h2 {
   color: white;
+  letter-spacing: 1.5px;
 }
 #next-fixture p {
   color: white;
@@ -376,23 +380,40 @@ section li {
 
 #last-fixtures {
   background-color: white;
-}
-#last-fixtures p, #last-fixtures li, #last-fixtures a {
   color: #002d55;
+}
+#last-fixtures p {
+  margin: 5px 0;
+}
+#last-fixtures h2 {
+  border-bottom: 5px solid #008852;
+}
+#last-fixtures a {
+  background-color: #002d55;
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+#last-fixtures li p:nth-child(2) {
+  font-weight: 900;
 }
 
 #pacific-table {
   background-color: #002d55;
 }
-#pacific-table p, #pacific-table li, #pacific-table a, #pacific-table h1, #pacific-table h2 {
-  color: white;
+#pacific-table p, #pacific-table li {
   font-size: 14px;
 }
 #pacific-table ul {
   display: flex;
   padding: 5px;
-  border-bottom: 2px solid white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   margin: 0;
+}
+#pacific-table ul:nth-child(3) {
+  border-bottom: 4px solid white;
 }
 #pacific-table ul li {
   padding: 5px;
@@ -403,6 +424,7 @@ section li {
   min-width: 25px;
 }
 #pacific-table ul li:nth-child(2) {
+  /* team name */
   min-width: 150px;
   text-align: left;
 }

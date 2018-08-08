@@ -225,11 +225,6 @@ function getPacificTable() {
                 // create list node and text, append text to node
                 var pacificTeamNameListItem = document.createElement('LI');
 
-                // check if team is the canucks, if so add class
-                if (pacificDivisionTeams[i].team.id == 23) {
-                    pacificTeamNameListItem.className = 'canucks-standing';
-                }
-
                 var pacificTeamTextNode = document.createTextNode(pacificDivisionTeams[i].team.name);
                 pacificTeamNameListItem.appendChild(pacificTeamTextNode);
 
@@ -239,10 +234,15 @@ function getPacificTable() {
                 // increment by one for each league position, force it to a number. Increment one per for loop
                 var incrementByOneTogetPosition = 1;
                 incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
-
+    
                 //  append the ID number onto table, add text node
                 pacificTableStandingIDString += incrementByOneTogetPosition;
                 document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamNameListItem);
+
+                // check if team is the canucks, add class to parent UL element for styling
+                if (pacificDivisionTeams[i].team.id == 23) {                
+                document.getElementById(pacificTableStandingIDString).className = 'canucks-standing';
+            }
 
                 // add league points to standing table
                 function addLeaguePoints(leaguePoints) {
