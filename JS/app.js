@@ -185,12 +185,19 @@ function getHighlights(highlights, index) {
             var extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
 
             // create list item and text node with link
-            var liHighlightNode = document.createTextNode(extendedHighlightLink);
+            // var liHighlightNode = document.createTextNode(extendedHighlightLink);
             var liHighlightLINode = document.createElement('li');
+
+            // create a link element to hold highlight URL
+            var a = document.createElement('a');
+            var aText = document.createTextNode('View Highlights');
+            a.appendChild(aText);
+            a.title = 'View game highlights';
+            a.href = extendedHighlightLink;
 
             // add the html id property using index
             var highlightContainerNodeIDString = "last-fixture-" + index;
-            liHighlightLINode.appendChild(liHighlightNode);
+            liHighlightLINode.appendChild(a);
 
             document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightLINode);
 
