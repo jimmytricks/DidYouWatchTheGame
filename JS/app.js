@@ -1,4 +1,3 @@
-
 function getLatestFixtures() {
 
     // set date to today'a date
@@ -21,10 +20,8 @@ function getLatestFixtures() {
             var nextGameObject = {};
             nextGameObject = JSON.parse(nextGame.response);
 
-
             // get next 4 fixtures
             function createGameDate(game) {
-                
 
                 // format date 
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -97,14 +94,8 @@ function getLatestResults() {
             var lastGameObject = {};
             lastGameObject = JSON.parse(lastGames.response);
 
-            // define a last fixture counter, starting on 1 to match html element
-            var lastFixtureCounter = 1;
-
-            function createGameDate(game) {
-
-                // increment by one each time it loops
-                lastFixtureCounter + 1;
-            
+            // pass in element plus index for using as html id
+            function createGameDate(game, index) {
 
                 // format date 
                 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -147,19 +138,20 @@ function getLatestResults() {
                 gameContainerNode.appendChild(liNodeFixture);
                 gameContainerNode.appendChild(liNodeResult);
 
-                // create string to grab league placing IDS                
-                var gameContainerNodeIDString = "last-fixture-" + (Number(lastFixtureCounter));               
+                // add to dynamic html ID using index, then append to LI element
+                var gameContainerNodeIDString = "last-fixture-" + index;
                 document.getElementById(gameContainerNodeIDString).appendChild(gameContainerNode);
             }
 
-            
-            var lastFiveGamesArray = lastGameObject.dates;
-            lastFiveGamesArray = lastFiveGamesArray.slice(-5).reverse();
+            // get the the last 4 games
+            var lastFourGamesArray = lastGameObject.dates;
+            lastFourGamesArray = lastFourGamesArray.slice(-4).reverse();
+
             // set game variables, run create game date function
-            var game1 = lastFiveGamesArray["0"].games["0"];
-            var game2 = lastFiveGamesArray["1"].games["0"];
-            var game3 = lastFiveGamesArray["2"].games["0"];
-            var game4 = lastFiveGamesArray["3"].games["0"];
+            var game1 = lastFourGamesArray["0"].games["0"];
+            var game2 = lastFourGamesArray["1"].games["0"];
+            var game3 = lastFourGamesArray["2"].games["0"];
+            var game4 = lastFourGamesArray["3"].games["0"];
             var nextFourGames = [game1, game2, game3, game4];
             nextFourGames.forEach(createGameDate);
 
@@ -168,49 +160,45 @@ function getLatestResults() {
         }
     };
     lastGames.open("GET", concatApiString, true);
-    
+
     lastGames.send();
 }
 
 getLatestResults();
 
-// set highlight counter to select correct html element
-var lastHighlightCounter = 0;
+
 
 // get highlights from last results
-function getHighlights(highlights) {
+function getHighlights(highlights, index) {
 
     // access api link containing highlights info
     var getContentLink = 'https://statsapi.web.nhl.com' + highlights['content']['link'];
 
-    // increment counter so each highlight is in correct list item
-    
-
     var getEachHighlight = new XMLHttpRequest();
     getEachHighlight.onreadystatechange = function () {
-        lastHighlightCounter + 1;
         if (this.readyState == 4 && this.status == 200) {
             // parse response into empty object
             var highlightObject = {};
             highlightObject = JSON.parse(getEachHighlight.response);
-            
+
+            // get link
             var extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
 
+            // create list item and text node with link
             var liHighlightNode = document.createTextNode(extendedHighlightLink);
-            var liHighlightLINode = document.createElement('li');        
+            var liHighlightLINode = document.createElement('li');
 
-            var highlightContainerNodeIDString = "last-fixture-" + (Number(lastHighlightCounter));
-            debugger;
+            // add the html id property using index
+            var highlightContainerNodeIDString = "last-fixture-" + index;
             liHighlightLINode.appendChild(liHighlightNode);
-          
-                document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightLINode);
-           
+
+            document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightLINode);
+
         }
     };
-        getEachHighlight.open("GET", getContentLink, true);
-        getEachHighlight.send();
+    getEachHighlight.open("GET", getContentLink, true);
+    getEachHighlight.send();
 };
-
 
 
 
