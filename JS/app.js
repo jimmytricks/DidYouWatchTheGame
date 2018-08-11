@@ -32,13 +32,9 @@ function getLatestFixtures() {
                 var pNodeFixture = document.createElement("p");
 
                 // create string to go into paragraph elements for both date and fixtures
-                var textStringDate = "";
-                textStringDate += gameDateFormatted;
+                var textStringDate = "" + gameDateFormatted;
 
-                var textStringFixture = "";
-                textStringFixture += game.teams.home.team.name;
-                textStringFixture += " vs ";
-                textStringFixture += game.teams.away.team.name;
+                var textStringFixture = "" + game.teams.home.team.name + " vs " + game.teams.away.team.name;
 
                 // create text node with date and fixture strings
                 var textNodeDate = document.createTextNode(textStringDate);
@@ -108,7 +104,7 @@ function getLatestResults() {
 
                 // create string to go into paragraph elements for date, fixtures, results
                 var textStringDate = "" + gameDateFormatted;
-                var textStringFixture = "" + game.teams.home.team.name + 'vs ' + game.teams.away.team.name;
+                var textStringFixture = "" + game.teams.home.team.name + ' vs ' + game.teams.away.team.name;
                 var textStringResult = "" + game.teams.home.score + ' - ' + game.teams.away.score;
 
                 // create text node with date and fixture strings
@@ -116,18 +112,28 @@ function getLatestResults() {
                 var textNodeFixture = document.createTextNode(textStringFixture);
                 var textStringResult = document.createTextNode(textStringResult);
 
-                // add date and fixture text nodes to respect paragraph elements
+                // add date and fixture text nodes to respective paragraph elements
                 pNode.appendChild(textNodeDate);
                 pNodeFixture.appendChild(textNodeFixture);
                 pNodeResult.appendChild(textStringResult);
 
-                // create container div
+                // add class to score element for styling
+                pNodeResult.classList.add("result-score");
+
+                //create container div for result and score, add class and append result to it
+                var scoreAndHighlightContainer = document.createElement("div");
+                var uniqueContainerID = "score-highlight-container-" + index;
+                scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
+                scoreAndHighlightContainer.appendChild(pNodeResult);
+
+                // create container li
                 var gameContainerNode = document.createElement('li');
 
-                // append paragraph elements to container div and add to page
+                // append paragraph elements to container li and add to page
                 gameContainerNode.appendChild(pNode);
                 gameContainerNode.appendChild(pNodeFixture);
-                gameContainerNode.appendChild(pNodeResult);
+                gameContainerNode.appendChild(scoreAndHighlightContainer);
+              
 
                 // add to dynamic html ID using index, then append to LI element
                 var gameContainerNodeIDString = "last-fixture-" + index;
@@ -154,7 +160,6 @@ function getLatestResults() {
 
     lastGames.send();
 }
-
 getLatestResults();
 
 
@@ -175,10 +180,6 @@ function getHighlights(highlights, index) {
             // get link
             var extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
 
-            // create list item and text node with link
-            // var liHighlightNode = document.createTextNode(extendedHighlightLink);
-            var liHighlightpNode = document.createElement('li');
-
             // create a link element to hold highlight URL
             var a = document.createElement('a');
             var aText = document.createTextNode('View Highlights');
@@ -186,11 +187,9 @@ function getHighlights(highlights, index) {
             a.title = 'View game highlights';
             a.href = extendedHighlightLink;
 
-            // add the html id property using index
-            var highlightContainerNodeIDString = "last-fixture-" + index;
-            liHighlightpNode.appendChild(a);
-
-            document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightpNode);
+            // add the a element to container with correct score
+            var highlightContainerNodeIDString = "score-highlight-container-" + index;
+            document.getElementById(highlightContainerNodeIDString).appendChild(a);
 
         }
     };
