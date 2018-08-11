@@ -28,32 +28,32 @@ function getLatestFixtures() {
                 var gameDateFormatted = new Date(game.gameDate).toLocaleDateString('en', options);
 
                 // create paragraph elements
-                var liNode = document.createElement("p");
-                var liNodeFixture = document.createElement("p");
+                var pNode = document.createElement("p");
+                var pNodeFixture = document.createElement("p");
 
                 // create string to go into paragraph elements for both date and fixtures
-                var listTextStringDate = "";
-                listTextStringDate += gameDateFormatted;
+                var textStringDate = "";
+                textStringDate += gameDateFormatted;
 
-                var listTextStringFixture = "";
-                listTextStringFixture += game.teams.home.team.name;
-                listTextStringFixture += " vs ";
-                listTextStringFixture += game.teams.away.team.name;
+                var textStringFixture = "";
+                textStringFixture += game.teams.home.team.name;
+                textStringFixture += " vs ";
+                textStringFixture += game.teams.away.team.name;
 
                 // create text node with date and fixture strings
-                var liTextNodeDate = document.createTextNode(listTextStringDate);
-                var liTextNodeFixture = document.createTextNode(listTextStringFixture);
+                var textNodeDate = document.createTextNode(textStringDate);
+                var textNodeFixture = document.createTextNode(textStringFixture);
 
                 // add date and fixture text nodes to respective paragraph elements
-                liNode.appendChild(liTextNodeDate);
-                liNodeFixture.appendChild(liTextNodeFixture);
+                pNode.appendChild(textNodeDate);
+                pNodeFixture.appendChild(textNodeFixture);
 
                 // create container div
                 var gameContainerNode = document.createElement('div');
 
                 // append paragraph elements to container div and add to page
-                gameContainerNode.appendChild(liNode);
-                gameContainerNode.appendChild(liNodeFixture);
+                gameContainerNode.appendChild(pNode);
+                gameContainerNode.appendChild(pNodeFixture);
                 document.getElementById('next-fixture').appendChild(gameContainerNode);
             }
 
@@ -102,41 +102,32 @@ function getLatestResults() {
                 var gameDateFormatted = new Date(game.gameDate).toLocaleDateString('en', options);
 
                 // create paragraph elements
-                var liNode = document.createElement("p");
-                var liNodeFixture = document.createElement("p");
-                var liNodeResult = document.createElement("p");
+                var pNode = document.createElement("p");
+                var pNodeFixture = document.createElement("p");
+                var pNodeResult = document.createElement("p");
 
-                // create string to go into paragraph elements for both date and fixtures
-                var listTextStringDate = "";
-                listTextStringDate += gameDateFormatted;
-
-                var listTextStringFixture = "";
-                listTextStringFixture += game.teams.home.team.name;
-                listTextStringFixture += " vs ";
-                listTextStringFixture += game.teams.away.team.name;
-
-                var listTextStringResult = "";
-                listTextStringResult += game.teams.home.score;
-                listTextStringResult += " - ";
-                listTextStringResult += game.teams.away.score;
+                // create string to go into paragraph elements for date, fixtures, results
+                var textStringDate = "" + gameDateFormatted;
+                var textStringFixture = "" + game.teams.home.team.name + 'vs ' + game.teams.away.team.name;
+                var textStringResult = "" + game.teams.home.score + ' - ' + game.teams.away.score;
 
                 // create text node with date and fixture strings
-                var liTextNodeDate = document.createTextNode(listTextStringDate);
-                var liTextNodeFixture = document.createTextNode(listTextStringFixture);
-                var liTextStringResult = document.createTextNode(listTextStringResult);
+                var textNodeDate = document.createTextNode(textStringDate);
+                var textNodeFixture = document.createTextNode(textStringFixture);
+                var textStringResult = document.createTextNode(textStringResult);
 
                 // add date and fixture text nodes to respect paragraph elements
-                liNode.appendChild(liTextNodeDate);
-                liNodeFixture.appendChild(liTextNodeFixture);
-                liNodeResult.appendChild(liTextStringResult);
+                pNode.appendChild(textNodeDate);
+                pNodeFixture.appendChild(textNodeFixture);
+                pNodeResult.appendChild(textStringResult);
 
                 // create container div
                 var gameContainerNode = document.createElement('li');
 
                 // append paragraph elements to container div and add to page
-                gameContainerNode.appendChild(liNode);
-                gameContainerNode.appendChild(liNodeFixture);
-                gameContainerNode.appendChild(liNodeResult);
+                gameContainerNode.appendChild(pNode);
+                gameContainerNode.appendChild(pNodeFixture);
+                gameContainerNode.appendChild(pNodeResult);
 
                 // add to dynamic html ID using index, then append to LI element
                 var gameContainerNodeIDString = "last-fixture-" + index;
@@ -186,7 +177,7 @@ function getHighlights(highlights, index) {
 
             // create list item and text node with link
             // var liHighlightNode = document.createTextNode(extendedHighlightLink);
-            var liHighlightLINode = document.createElement('li');
+            var liHighlightpNode = document.createElement('li');
 
             // create a link element to hold highlight URL
             var a = document.createElement('a');
@@ -197,9 +188,9 @@ function getHighlights(highlights, index) {
 
             // add the html id property using index
             var highlightContainerNodeIDString = "last-fixture-" + index;
-            liHighlightLINode.appendChild(a);
+            liHighlightpNode.appendChild(a);
 
-            document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightLINode);
+            document.getElementById(highlightContainerNodeIDString).appendChild(liHighlightpNode);
 
         }
     };
