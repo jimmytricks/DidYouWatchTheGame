@@ -104,8 +104,39 @@ function getLatestResults() {
 
                 // create string to go into paragraph elements for date, fixtures, results
                 var textStringDate = "" + gameDateFormatted;
+
+                var textStringResult = ""
+
+                // set vars to use in if statement below
+                var canucksID = game.teams.home.team.id;
+                var homeTeamScore = game.teams.home.score;
+                var awayTeamScore = game.teams.away.score;
+
+                // check for a draw
+                if (homeTeamScore === awayTeamScore) {
+                    textStringResult = "Draw " + game.teams.home.score + ' - ' + game.teams.away.score;
+                }
+
+                // check if home team is the canucks
+                if (canucksID == 22) {
+                    // if canucks home score more than away, prefix with win if not loss
+                    if (homeTeamScore > awayTeamScore) {
+                        textStringResult = "Win " + game.teams.home.score + ' - ' + game.teams.away.score;
+                    } else {
+                        textStringResult = "Loss " + game.teams.home.score + ' - ' + game.teams.away.score;
+                    }
+                // if canucks are away team
+                } else {
+                    // prefix with win if higher score, if not loss
+                    if (homeTeamScore < awayTeamScore) {
+                        textStringResult = "Win " + game.teams.away.score + ' - ' + game.teams.home.score;
+                    } else {
+                        textStringResult = "Loss " + game.teams.away.score + ' - ' + game.teams.home.score;
+                    }
+                }
+
                 var textStringFixture = "" + game.teams.home.team.name + ' vs ' + game.teams.away.team.name;
-                var textStringResult = "" + game.teams.home.score + ' - ' + game.teams.away.score;
+
 
                 // create text node with date and fixture strings
                 var textNodeDate = document.createTextNode(textStringDate);
@@ -133,7 +164,7 @@ function getLatestResults() {
                 gameContainerNode.appendChild(pNode);
                 gameContainerNode.appendChild(pNodeFixture);
                 gameContainerNode.appendChild(scoreAndHighlightContainer);
-              
+
 
                 // add to dynamic html ID using index, then append to LI element
                 var gameContainerNodeIDString = "last-fixture-" + index;
@@ -224,15 +255,15 @@ function getPacificTable() {
                 // increment by one for each league position, force it to a number. Increment one per for loop
                 var incrementByOneTogetPosition = 1;
                 incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
-    
+
                 //  append the ID number onto table, add text node
                 pacificTableStandingIDString += incrementByOneTogetPosition;
                 document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamNameListItem);
 
                 // check if team is the canucks, add class to parent UL element for styling
-                if (pacificDivisionTeams[i].team.id == 23) {                
-                document.getElementById(pacificTableStandingIDString).className = 'canucks-standing';
-            }
+                if (pacificDivisionTeams[i].team.id == 23) {
+                    document.getElementById(pacificTableStandingIDString).className = 'canucks-standing';
+                }
 
                 // add league points to standing table
                 function addLeaguePoints(leaguePoints) {
