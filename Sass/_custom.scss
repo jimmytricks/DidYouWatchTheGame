@@ -1,3 +1,7 @@
+html, body {
+    height:100%;
+    width:100%;
+}
 
 html {
     font-size:$font-size;
@@ -48,11 +52,44 @@ section {
     }
 }
 
+// Last fixtures
+
 #last-fixtures {
     background-color:$white;
     color:$secondary-colour;
     p {
         margin: 5px 0;
+    }
+    p.result-score {
+        width: 150px;
+        background-color: $secondary-colour;
+        color:$white;
+        margin:0;
+        margin-right:10px;
+        padding:8px;
+        text-align:center;
+        text-transform: uppercase;
+        font-size: 0.9em;
+        height:18px;
+        &::after {
+            content: 'View Score';
+            width: 150px;
+            display: block;
+            background-color: $primary-colour;
+            z-index: 10;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-left: 40px;
+            height: 18px;
+            padding:8px;
+            visibility: visible;
+            transition: all 0.5s ease-in-out;
+        }
+        &:hover:after {
+            background-color:$secondary-colour;
+            visibility:hidden;
+        }
     }
     h2 {
         border-bottom: 5px solid $primary-colour;
@@ -64,13 +101,26 @@ section {
         padding: 8px;
         text-transform: uppercase;
         font-size: 0.9em;
+        width: 150px;
+        text-align: center;
+
     }
     li p {
         &:nth-child(2){
             font-weight:900;
         }
     }
+    ul {
+        position:relative;
+    }
 }
+
+#score-highlight-container-0, #score-highlight-container-1, #score-highlight-container-2, #score-highlight-container-3 {
+    display:flex;
+}
+
+
+// pacific table section
 
 #pacific-table {
     background-color:$secondary-colour;
