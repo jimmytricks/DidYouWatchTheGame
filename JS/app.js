@@ -216,6 +216,7 @@ function getHighlights(highlights, index) {
             var aText = document.createTextNode('View Highlights');
             a.appendChild(aText);
             a.title = 'View game highlights';
+            a.setAttribute('target', '_blank');
             a.href = extendedHighlightLink;
 
             // add the a element to container with correct score
