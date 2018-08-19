@@ -350,7 +350,8 @@ a {
 }
 
 section {
-  padding: 20px 20px;
+  padding: 20px 40px;
+  flex-grow: 1;
 }
 section li {
   list-style-type: none;
@@ -436,7 +437,6 @@ section h2 {
 #last-fixtures {
   background-color: white;
   color: #002d55;
-  flex-grow: 1;
 }
 #last-fixtures p {
   margin: 5px 0;
@@ -523,6 +523,42 @@ section h2 {
   /* team name */
   min-width: 150px;
   text-align: left;
+}
+
+@media (max-width: 1081px) {
+  .container {
+    flex-direction: column;
+  }
+
+  section {
+    padding: 20px 80px;
+  }
+}
+@media (max-width: 521px) {
+  section {
+    padding: 20px 20px;
+  }
+
+  #pacific-table ul li {
+    min-width: 18px;
+  }
+  #pacific-table ul li:first-child {
+    min-width: 15px;
+  }
+  #pacific-table ul li:nth-child(2) {
+    width: 140px;
+  }
+
+  #last-fixtures p.result-score {
+    width: 100px;
+  }
+  #last-fixtures p.result-score::after {
+    width: 120px;
+  }
+  #last-fixtures a {
+    width: 120px;
+    font-size: 0.8rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
