@@ -125,7 +125,7 @@ function getLatestResults() {
                     } else {
                         textStringResult = "Loss " + game.teams.home.score + ' - ' + game.teams.away.score;
                     }
-                // if canucks are away team
+                    // if canucks are away team
                 } else {
                     // prefix with win if higher score, if not loss
                     if (homeTeamScore < awayTeamScore) {

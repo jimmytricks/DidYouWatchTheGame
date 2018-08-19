@@ -362,13 +362,6 @@ section h2 {
   border-bottom: 5px solid rgba(255, 255, 255, 0.5);
 }
 
-.canucks-standing {
-  background-color: #008852;
-}
-.canucks-standing li {
-  font-weight: 900;
-}
-
 .wrapper {
   min-height: 100%;
   display: grid;
@@ -399,6 +392,7 @@ section h2 {
 }
 
 /* end header */
+/* footer */
 .footer {
   grid-area: footer;
   background-color: #32292F;
@@ -416,6 +410,11 @@ section h2 {
   color: #008852;
 }
 
+.zu-container p {
+  text-align: right;
+}
+
+/* end footer */
 #next-fixture {
   background-color: #008852;
 }
@@ -431,7 +430,7 @@ section h2 {
   font-weight: 900;
 }
 #next-fixture div {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 
 #last-fixtures {
@@ -496,6 +495,17 @@ section h2 {
   display: flex;
 }
 
+.pacific-table-container {
+  display: inline-block;
+}
+
+.canucks-standing {
+  background-color: #008852;
+}
+.canucks-standing li {
+  font-weight: 900;
+}
+
 #pacific-table {
   background-color: #002d55;
 }
@@ -525,6 +535,11 @@ section h2 {
   text-align: left;
 }
 
+@media (max-width: 1201px) {
+  #next-fixture div {
+    margin-bottom: 20px;
+  }
+}
 @media (max-width: 1081px) {
   .container {
     flex-direction: column;
@@ -535,6 +550,18 @@ section h2 {
   }
 }
 @media (max-width: 521px) {
+  #last-fixtures p.result-score {
+    width: 110px;
+  }
+  #last-fixtures p.result-score::after {
+    width: 110px;
+  }
+  #last-fixtures a {
+    width: 110px;
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 421px) {
   section {
     padding: 20px 20px;
   }
@@ -547,17 +574,6 @@ section h2 {
   }
   #pacific-table ul li:nth-child(2) {
     width: 140px;
-  }
-
-  #last-fixtures p.result-score {
-    width: 100px;
-  }
-  #last-fixtures p.result-score::after {
-    width: 120px;
-  }
-  #last-fixtures a {
-    width: 120px;
-    font-size: 0.8rem;
   }
 }
 

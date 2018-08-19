@@ -30,13 +30,6 @@ section {
     }
 }
 
-.canucks-standing {
-    background-color:$primary-colour;
-    li { 
-    font-weight:900;
-    }
-}
-
 
 .wrapper {
     min-height:100%;
@@ -73,6 +66,7 @@ section {
 
 /* end header */
 
+/* footer */
 .footer {
     grid-area:footer;
     background-color:$black;
@@ -90,6 +84,12 @@ section {
     }
 }
 
+.zu-container p {
+    text-align:right;
+}
+
+/* end footer */
+
 
 #next-fixture {
     background-color:$primary-colour;
@@ -105,7 +105,7 @@ section {
         }
     }
     div {
-        margin-bottom:25px;
+        margin-bottom:40px;
     }
 }
 
@@ -179,6 +179,17 @@ section {
 
 // pacific table section
 
+.pacific-table-container {
+    display:inline-block;
+}
+
+.canucks-standing {
+    background-color:$primary-colour;
+    li { 
+    font-weight:900;
+    }
+}
+
 #pacific-table {
     background-color:$secondary-colour;
     p, li {
@@ -209,6 +220,13 @@ section {
 
 // Media queries
 
+@media (max-width: 1201px) {
+    #next-fixture div {
+        margin-bottom:20px;
+    }
+}
+
+
 @media (max-width: 1081px) {
     .container {
         flex-direction:column;
@@ -218,38 +236,22 @@ section {
     }
 }
 
-// @media (max-width: 521px) {
-//     section {
-//         padding: 20px 20px;
-//     }
-// }
+@media (max-width: 521px) {
+    #last-fixtures {
+        p.result-score {
+            width:110px;
+            &::after{
+                width:110px;
+            }
+        }
+        a {
+            width: 110px;
+            font-size:0.8rem;
+        }
+    }
+}
 
-// @media (max-width:420px){
-//     section {
-//         padding:20px 20px;
-//     }
-//     #pacific-table ul li:first-child {
-//         min-width: 15px;
-//     }
-//     #pacific-table ul li {
-//         min-width: 18px;
-//     }
-//     #pacific-table ul li:nth-child(2) {
-//         min-width: 140px;
-//     }
-//     #last-fixtures p.result-score::after {
-//         width:120px;
-//     }
-//     #last-fixtures p.result-score {
-//         width:120px;
-//     }
-//     #last-fixtures a {
-//         width: 120px;
-//         font-size:0.8rem;
-//     }
-// }
-
-@media (max-width:521px){
+@media (max-width:421px){
     section {
         padding:20px 20px;
     }
@@ -265,16 +267,4 @@ section {
         }
     }
     
-    #last-fixtures {
-        p.result-score {
-            width:110px;
-            &::after{
-                width:110px;
-            }
-        }
-        a {
-            width: 110px;
-            font-size:0.8rem;
-        }
-    }
 }
