@@ -9,8 +9,16 @@ html {
     color:$white;
 }
 
+h1 {
+    font-size:1.2rem;
+}
+
+a {
+    text-decoration:none;
+}
+
 section {
-    padding:20px 40px;
+    padding:20px 20px;
     li {
         list-style-type: none;
     }
@@ -33,7 +41,7 @@ section {
     min-height:100%;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 50px auto 100px;
+    grid-template-rows: 50px auto 50px;
     grid-template-areas:
     "header header header"
     "main main main"
@@ -45,14 +53,40 @@ section {
     display:flex;
 }
 
+/* header */
+
 .header {
     grid-area:header;
-    background-color:$darkest-grey;
+    background-color:$black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.header-subtitle {
+    font-weight: 100;
+    border-left: 2px solid #008852;
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+/* end header */
 
 .footer {
     grid-area:footer;
-    background-color:$darkest-grey;
+    background-color:$black;
+    padding:5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: $lighter-white;
+    a {
+        color:white;
+        &:hover{
+            color:$primary-colour;
+        }
+    }
 }
 
 

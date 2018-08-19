@@ -341,8 +341,16 @@ html {
   color: white;
 }
 
+h1 {
+  font-size: 1.2rem;
+}
+
+a {
+  text-decoration: none;
+}
+
 section {
-  padding: 20px 40px;
+  padding: 20px 20px;
 }
 section li {
   list-style-type: none;
@@ -364,7 +372,7 @@ section h2 {
   min-height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 50px auto 100px;
+  grid-template-rows: 50px auto 50px;
   grid-template-areas: "header header header" "main main main" "footer footer footer";
 }
 
@@ -373,14 +381,38 @@ section h2 {
   display: flex;
 }
 
+/* header */
 .header {
   grid-area: header;
-  background-color: #3c3c3c;
+  background-color: #32292F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.header-subtitle {
+  font-weight: 100;
+  border-left: 2px solid #008852;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+/* end header */
 .footer {
   grid-area: footer;
-  background-color: #3c3c3c;
+  background-color: #32292F;
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #EAE8FF;
+}
+.footer a {
+  color: white;
+}
+.footer a:hover {
+  color: #008852;
 }
 
 #next-fixture {
@@ -493,4 +525,4 @@ section h2 {
   text-align: left;
 }
 
-/*# sourceMappingURL=CSS/style.css.map */
+/*# sourceMappingURL=style.css.map */
