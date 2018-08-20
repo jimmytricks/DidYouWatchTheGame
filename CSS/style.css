@@ -383,6 +383,14 @@ section h2 {
   justify-content: center;
   align-items: center;
 }
+.header .logo {
+  position: absolute;
+  left: 40px;
+}
+.header .logo img {
+  height: 34px;
+  padding-top: 2px;
+}
 
 .header-subtitle {
   font-weight: 100;
@@ -548,6 +556,10 @@ section h2 {
   section {
     padding: 20px 80px;
   }
+
+  .header .logo {
+    left: 80px;
+  }
 }
 @media (max-width: 521px) {
   #last-fixtures p.result-score {
@@ -559,6 +571,10 @@ section h2 {
   #last-fixtures a {
     width: 110px;
     font-size: 0.8rem;
+  }
+
+  .header .logo {
+    display: none;
   }
 }
 @media (max-width: 421px) {
