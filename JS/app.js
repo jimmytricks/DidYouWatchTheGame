@@ -187,8 +187,6 @@ function getLatestResults() {
     lastGames.send();
 }
 
-
-
 // get highlights from last results
 function getHighlights(highlights, index) {
 
