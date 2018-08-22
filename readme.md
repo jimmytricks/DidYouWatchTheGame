@@ -11,12 +11,12 @@ Single page application that utilizes the NHL REST API to show the Canucks upcom
 
 # How it works
 
-Four AJAX XMLHttpRequests to the NHL API to get information on (1) Upcoming Fixtures, (2) Previous Results, (3) Highlight url information, (4) Pacific table standings. Information is parsed into empty objects and then added into the DOM. 
+AJAX XMLHttpRequests to the NHL API to get information on Upcoming Fixtures, Previous Results, Highlight url information, Pacific table standings. Information manipulated and parsed into DOM.
 
 # Roadmap
 
-- Add top point scorers / more stats
 - Create interactive feature to switch between multiple NHL Teams
+- Add dynamic colours depending on teams
 
 
 # Credits
