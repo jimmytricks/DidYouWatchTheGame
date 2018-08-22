@@ -11,7 +11,6 @@ function getLatestFixtures() {
     var apiStartString = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=23&startDate=";
     var apiEndString = "&endDate=2019-01-12";
     var concatApiString = apiStartString.concat(todayDate, apiEndString);
-    console.log(concatApiString);
 
     var nextGame = new XMLHttpRequest();
     nextGame.onreadystatechange = function () {
@@ -65,7 +64,6 @@ function getLatestFixtures() {
     nextGame.open("GET", concatApiString, true);
     nextGame.send();
 }
-getLatestFixtures();
 
 // get last 4 results
 function getLatestResults() {
@@ -118,7 +116,7 @@ function getLatestResults() {
                 }
 
                 // check if home team is the canucks
-                if (canucksID == 22) {
+                if (canucksID == 23) {
                     // if canucks home score more than away, prefix with win if not loss
                     if (homeTeamScore > awayTeamScore) {
                         textStringResult = "Win " + game.teams.home.score + ' - ' + game.teams.away.score;
@@ -191,7 +189,6 @@ function getLatestResults() {
 
     lastGames.send();
 }
-getLatestResults();
 
 
 
@@ -228,8 +225,6 @@ function getHighlights(highlights, index) {
     getEachHighlight.open("GET", getContentLink, true);
     getEachHighlight.send();
 };
-
-
 
 function getPacificTable() {
 
@@ -319,4 +314,11 @@ function getPacificTable() {
     pacificTable.send();
 }
 
-getPacificTable();
+function init() {
+    getLatestFixtures();
+    getLatestResults();
+    getPacificTable();
+}
+
+init();
+
