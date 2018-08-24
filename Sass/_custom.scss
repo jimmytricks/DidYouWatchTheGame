@@ -185,9 +185,9 @@ section {
 }
 
 
-// pacific table section
+// division table section
 
-.pacific-table-container {
+.division-table-container {
     display:inline-block;
 }
 
@@ -198,7 +198,7 @@ section {
     }
 }
 
-#pacific-table {
+#division-table {
     background-color:$secondary-colour;
     p, li {
         font-size:$font-size-smaller;
@@ -269,7 +269,7 @@ section {
     section {
         padding:20px 20px;
     }
-    #pacific-table ul {
+    #division-table ul {
         li {
             min-width: 18px;
             &:first-child {

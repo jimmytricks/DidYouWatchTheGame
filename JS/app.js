@@ -1,4 +1,4 @@
-function getLatestFixtures() {
+function getLatestFixtures(teamID) {
 
     // set date to today'a date
     const todaysDateAndTimeObject = new Date();
@@ -8,9 +8,10 @@ function getLatestFixtures() {
     const todayDate = todaysDateAndTime.substring(0, 10);
 
     // set vars to concat string based on todays date
-    const apiStartString = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=23&startDate=";
+    const apiStartString = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=" + teamID + "&startDate=";
     const apiEndString = "&endDate=2019-01-12";
     const concatApiString = apiStartString.concat(todayDate, apiEndString);
+    console.log(concatApiString);
 
     let nextGame = new XMLHttpRequest();
     nextGame.onreadystatechange = function () {
@@ -66,7 +67,7 @@ function getLatestFixtures() {
 }
 
 // get last 4 results
-function getLatestResults() {
+function getLatestResults(teamID) {
 
     // set date to today'a date
     const todaysDateAndTimeObject = new Date();
@@ -76,7 +77,7 @@ function getLatestResults() {
     const todayDate = todaysDateAndTime.substring(0, 10);
 
     // set vars to concat string based on todays date
-    const apiStartString = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=23&startDate=2018-01-01&endDate=";
+    const apiStartString = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=" + teamID + "&startDate=2018-01-01&endDate=";
     const concatApiString = apiStartString.concat(todayDate);
 
     let lastGames = new XMLHttpRequest();
@@ -104,7 +105,7 @@ function getLatestResults() {
                 let textStringResult = ""
 
                 // set vars to use in if statement below
-                const teamID = game.teams.home.team.id;
+                const hockeyTeamID = game.teams.home.team.id;
                 const homeTeamScore = game.teams.home.score;
                 const awayTeamScore = game.teams.away.score;
 
@@ -113,15 +114,15 @@ function getLatestResults() {
                     textStringResult = "Draw " + game.teams.home.score + ' - ' + game.teams.away.score;
                 }
 
-                // check if home team is the canucks
-                if (teamID == 23) {
-                    // if canucks home score more than away, prefix with win if not loss
+                // check if home team is the current team
+                if (hockeyTeamID == teamID) {
+                    // if current team home score more than away, prefix with win if not loss
                     if (homeTeamScore > awayTeamScore) {
                         textStringResult = "Win " + game.teams.home.score + ' - ' + game.teams.away.score;
                     } else {
                         textStringResult = "Loss " + game.teams.home.score + ' - ' + game.teams.away.score;
                     }
-                    // if canucks are away team
+                    // if current team are away team
                 } else {
                     // prefix with win if higher score, if not loss
                     if (homeTeamScore < awayTeamScore) {
@@ -221,59 +222,59 @@ function getHighlights(highlights, index) {
     getEachHighlight.send();
 };
 
-function getPacificTable() {
+function getDivisionTable() {
 
-    let pacificTable = new XMLHttpRequest();
-    pacificTable.onreadystatechange = function () {
+    let divisionTable = new XMLHttpRequest();
+    divisionTable.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // parse response into empty object
-            let pacificTableObject = {};
-            pacificTableObject = JSON.parse(pacificTable.response);
+            let divisionTableObject = {};
+            divisionTableObject = JSON.parse(divisionTable.response);
 
-            // set let for Pacific division, loop through teams
-            const pacificDivisionTeams = pacificTableObject.records[3].teamRecords;
-            for (i = 0; i < pacificDivisionTeams.length; i++) {
+            // set let for division division, loop through teams
+            const divisionDivisionTeams = divisionTableObject.records[3].teamRecords;
+            for (i = 0; i < divisionDivisionTeams.length; i++) {
 
                 // create list node and text, append text to node
-                const pacificTeamNameListItem = document.createElement('LI');
+                const divisionTeamNameListItem = document.createElement('LI');
 
-                const pacificTeamTextNode = document.createTextNode(pacificDivisionTeams[i].team.name);
-                pacificTeamNameListItem.appendChild(pacificTeamTextNode);
+                const divisionTeamTextNode = document.createTextNode(divisionDivisionTeams[i].team.name);
+                divisionTeamNameListItem.appendChild(divisionTeamTextNode);
 
                 // create string to grab league placing IDS
-                let pacificTableStandingIDString = "pacific-table-";
+                let divisionTableStandingIDString = "division-table-";
 
                 // increment by one for each league position, force it to a number. Increment one per for loop
                 let incrementByOneTogetPosition = 1;
                 incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
 
                 //  append the ID number onto table, add text node
-                pacificTableStandingIDString += incrementByOneTogetPosition;
-                document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamNameListItem);
+                divisionTableStandingIDString += incrementByOneTogetPosition;
+                document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamNameListItem);
 
                 // check if team is the canucks, add class to parent UL element for styling
-                if (pacificDivisionTeams[i].team.id == 23) {
-                    document.getElementById(pacificTableStandingIDString).className = 'canucks-standing';
+                if (divisionDivisionTeams[i].team.id == 23) {
+                    document.getElementById(divisionTableStandingIDString).className = 'canucks-standing';
                 }
 
                 // add league points to standing table
                 function addLeaguePoints(leaguePoints) {
 
                     // create list node and text, append text to node
-                    const pacificTeamPointsListItem = document.createElement('LI');
-                    const pacificTeamPointsTextNode = document.createTextNode(pacificDivisionTeams[i][leaguePoints]);
-                    pacificTeamPointsListItem.appendChild(pacificTeamPointsTextNode);
+                    const divisionTeamPointsListItem = document.createElement('LI');
+                    const divisionTeamPointsTextNode = document.createTextNode(divisionDivisionTeams[i][leaguePoints]);
+                    divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
 
                     // create string to grab league placing IDS
-                    let pacificTableStandingIDString = "pacific-table-";
+                    let divisionTableStandingIDString = "division-table-";
 
                     // increment by one for each league position, force it to a number. Increment one per for loop
                     let incrementByOneTogetPosition = 1;
                     incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
 
                     //  append the ID number onto table, add text node
-                    pacificTableStandingIDString += incrementByOneTogetPosition;
-                    document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamPointsListItem);
+                    divisionTableStandingIDString += incrementByOneTogetPosition;
+                    document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamPointsListItem);
                 }
 
                 addLeaguePoints('points');
@@ -282,20 +283,20 @@ function getPacificTable() {
                 function addLeagueStats(leagueStats) {
 
                     // create list node and text, append text to node
-                    const pacificTeamPointsListItem = document.createElement('LI');
-                    const pacificTeamPointsTextNode = document.createTextNode(pacificDivisionTeams[i].leagueRecord[leagueStats]);
-                    pacificTeamPointsListItem.appendChild(pacificTeamPointsTextNode);
+                    const divisionTeamPointsListItem = document.createElement('LI');
+                    const divisionTeamPointsTextNode = document.createTextNode(divisionDivisionTeams[i].leagueRecord[leagueStats]);
+                    divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
 
                     // create string to grab league placing IDS
-                    let pacificTableStandingIDString = "pacific-table-";
+                    let divisionTableStandingIDString = "division-table-";
 
                     // increment by one for each league position, force it to a number. Increment one per for loop
                     let incrementByOneTogetPosition = 1;
                     incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
 
                     //  append the ID number onto table, add text node
-                    pacificTableStandingIDString += incrementByOneTogetPosition;
-                    document.getElementById(pacificTableStandingIDString).appendChild(pacificTeamPointsListItem);
+                    divisionTableStandingIDString += incrementByOneTogetPosition;
+                    document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamPointsListItem);
                 }
 
                 addLeagueStats('wins');
@@ -305,15 +306,15 @@ function getPacificTable() {
         }
     }
 
-    pacificTable.open("GET", 'https://statsapi.web.nhl.com/api/v1/standings/byDivision', true);
-    pacificTable.send();
+    divisionTable.open("GET", 'https://statsapi.web.nhl.com/api/v1/standings/byDivision', true);
+    divisionTable.send();
 }
 
-function init() {
-    getLatestFixtures();
-    getLatestResults();
-    getPacificTable();
+function init(teamID) {
+    getLatestFixtures(teamID);
+    getLatestResults(teamID);
+    getDivisionTable(teamID);
 }
 
-init();
+init(22);
 

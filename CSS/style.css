@@ -503,7 +503,7 @@ section h2 {
   display: flex;
 }
 
-.pacific-table-container {
+.division-table-container {
   display: inline-block;
 }
 
@@ -514,30 +514,30 @@ section h2 {
   font-weight: 900;
 }
 
-#pacific-table {
+#division-table {
   background-color: #002d55;
 }
-#pacific-table p, #pacific-table li {
+#division-table p, #division-table li {
   font-size: 14px;
 }
-#pacific-table ul {
+#division-table ul {
   display: flex;
   padding: 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   margin: 0;
 }
-#pacific-table ul:nth-child(4) {
+#division-table ul:nth-child(4) {
   border-bottom: 4px solid white;
 }
-#pacific-table ul li {
+#division-table ul li {
   padding: 5px;
   min-width: 30px;
   text-align: center;
 }
-#pacific-table ul li:first-child {
+#division-table ul li:first-child {
   min-width: 25px;
 }
-#pacific-table ul li:nth-child(2) {
+#division-table ul li:nth-child(2) {
   /* team name */
   min-width: 150px;
   text-align: left;
@@ -582,15 +582,15 @@ section h2 {
     padding: 20px 20px;
   }
 
-  #pacific-table ul li {
+  #division-table ul li {
     min-width: 18px;
   }
-  #pacific-table ul li:first-child {
+  #division-table ul li:first-child {
     min-width: 15px;
   }
-  #pacific-table ul li:nth-child(2) {
+  #division-table ul li:nth-child(2) {
     width: 140px;
   }
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=CSS/style.css.map */
