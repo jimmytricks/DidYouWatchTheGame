@@ -507,10 +507,10 @@ section h2 {
   display: inline-block;
 }
 
-.canucks-standing {
+.currentteam-standing {
   background-color: #008852;
 }
-.canucks-standing li {
+.currentteam-standing li {
   font-weight: 900;
 }
 

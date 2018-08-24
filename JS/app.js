@@ -11,7 +11,6 @@ function getLatestFixtures(teamID) {
     const apiStartString = "https://statsapi.web.nhl.com/api/v1/schedule?teamId=" + teamID + "&startDate=";
     const apiEndString = "&endDate=2019-01-12";
     const concatApiString = apiStartString.concat(todayDate, apiEndString);
-    console.log(concatApiString);
 
     let nextGame = new XMLHttpRequest();
     nextGame.onreadystatechange = function () {
@@ -222,7 +221,7 @@ function getHighlights(highlights, index) {
     getEachHighlight.send();
 };
 
-function getDivisionTable() {
+function getDivisionTable(teamID) {
 
     let divisionTable = new XMLHttpRequest();
     divisionTable.onreadystatechange = function () {
@@ -231,14 +230,31 @@ function getDivisionTable() {
             let divisionTableObject = {};
             divisionTableObject = JSON.parse(divisionTable.response);
 
-            // set let for division division, loop through teams
-            const divisionDivisionTeams = divisionTableObject.records[3].teamRecords;
-            for (i = 0; i < divisionDivisionTeams.length; i++) {
+            let divisionNumber;
+
+            // check which division the current team ID belongs to by looping through each
+            function checkWhichDivision(teamID){
+                for (e = 0; e < divisionTableObject.records.length; e++) {                    
+                    for (a = 0; a < divisionTableObject.records[e].teamRecords.length; a++){
+                        if (teamID === divisionTableObject.records[e].teamRecords[a].team.id){
+                            const divisionTableName = document.getElementById('division-table-name').innerText = divisionTableObject.records[e].division.name;
+
+                            // set division number to the iteration / index of correct array
+                            divisionNumber = e;
+                        }
+                    }
+                }
+            }
+            checkWhichDivision(teamID);
+
+
+            const divisionTeams = divisionTableObject.records[divisionNumber].teamRecords;
+            for (i = 0; i < divisionTeams.length; i++) {
 
                 // create list node and text, append text to node
                 const divisionTeamNameListItem = document.createElement('LI');
 
-                const divisionTeamTextNode = document.createTextNode(divisionDivisionTeams[i].team.name);
+                const divisionTeamTextNode = document.createTextNode(divisionTeams[i].team.name);
                 divisionTeamNameListItem.appendChild(divisionTeamTextNode);
 
                 // create string to grab league placing IDS
@@ -253,8 +269,8 @@ function getDivisionTable() {
                 document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamNameListItem);
 
                 // check if team is the canucks, add class to parent UL element for styling
-                if (divisionDivisionTeams[i].team.id == 23) {
-                    document.getElementById(divisionTableStandingIDString).className = 'canucks-standing';
+                if (divisionTeams[i].team.id == teamID) {
+                    document.getElementById(divisionTableStandingIDString).className = 'currentteam-standing';
                 }
 
                 // add league points to standing table
@@ -262,7 +278,7 @@ function getDivisionTable() {
 
                     // create list node and text, append text to node
                     const divisionTeamPointsListItem = document.createElement('LI');
-                    const divisionTeamPointsTextNode = document.createTextNode(divisionDivisionTeams[i][leaguePoints]);
+                    const divisionTeamPointsTextNode = document.createTextNode(divisionTeams[i][leaguePoints]);
                     divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
 
                     // create string to grab league placing IDS
@@ -284,7 +300,7 @@ function getDivisionTable() {
 
                     // create list node and text, append text to node
                     const divisionTeamPointsListItem = document.createElement('LI');
-                    const divisionTeamPointsTextNode = document.createTextNode(divisionDivisionTeams[i].leagueRecord[leagueStats]);
+                    const divisionTeamPointsTextNode = document.createTextNode(divisionTeams[i].leagueRecord[leagueStats]);
                     divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
 
                     // create string to grab league placing IDS
