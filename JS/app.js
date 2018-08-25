@@ -237,10 +237,16 @@ function getDivisionTable(teamID) {
                 for (e = 0; e < divisionTableObject.records.length; e++) {                    
                     for (a = 0; a < divisionTableObject.records[e].teamRecords.length; a++){
                         if (teamID === divisionTableObject.records[e].teamRecords[a].team.id){
-                            const divisionTableName = document.getElementById('division-table-name').innerText = divisionTableObject.records[e].division.name;
+                            document.getElementById('division-table-name').innerText = divisionTableObject.records[e].division.name;
 
                             // set division number to the iteration / index of correct array
                             divisionNumber = e;
+
+                            // if division is central, remove 8th place from table
+                            if (divisionNumber == 2){
+                                const hideExtraDivPosition = document.getElementById('division-table-8');
+                                hideExtraDivPosition.style.display = 'none';
+                            }
                         }
                     }
                 }
@@ -326,11 +332,20 @@ function getDivisionTable(teamID) {
     divisionTable.send();
 }
 
-function init(teamID) {
+
+function resetInfo(){
+    // function to reset the values to default
+}
+
+function init(){
+    const currentTeamSelected = document.getElementById("team-selector").value;
+    runApp(currentTeamSelected);
+}
+
+function runApp(teamID) {
     getLatestFixtures(teamID);
     getLatestResults(teamID);
     getDivisionTable(teamID);
 }
 
-init(22);
-
+init();
