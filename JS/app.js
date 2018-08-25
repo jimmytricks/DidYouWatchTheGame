@@ -338,7 +338,7 @@ function resetInfo(){
 }
 
 function init(){
-    const currentTeamSelected = document.getElementById("team-selector").value;
+    const currentTeamSelected = Number(document.getElementById("team-selector").value);
     runApp(currentTeamSelected);
 }
 
