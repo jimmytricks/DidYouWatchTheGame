@@ -1,0 +1,9 @@
+# Third party libraries
+node_modules
+
+# OS System files
+/Icon?
+.DS_Store
+
+# VSCode
+.vscode/
