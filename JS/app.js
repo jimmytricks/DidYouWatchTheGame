@@ -51,10 +51,7 @@ function fetchJSON(pathToResource, callback) {
 
 // Get latest fixtures
 function getLatestFixtures(teamID) {
-    function onRequestedPreviousFixtures(result) {
-        if (!result) { return; }
-        let nextGameObject = result
-
+    function onRequestedPreviousFixtures(nextGameObject) {
         // get next 4 fixtures
         function createGameDate(game) {
             // format date 
@@ -107,9 +104,7 @@ function getLatestFixtures(teamID) {
 
 // get last 4 results
 function getLatestResults(teamID) {
-    function onRequestedLatestResults(result) {
-        let lastGameObject = result;
-
+    function onRequestedLatestResults(lastGameObject) {
         // pass in element plus index for using as html id
         function createGameDate(game, index) {
             // format date 
@@ -217,9 +212,7 @@ function getLatestResults(teamID) {
 
 // get highlights from last results
 function getHighlights(highlights, index) {
-    function onRequestedHighlights(result) {
-        let highlightObject = result;
-
+    function onRequestedHighlights(highlightObject) {
         // get link
         const extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
 
