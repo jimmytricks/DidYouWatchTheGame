@@ -144,7 +144,6 @@ function appendChildrenToElement(parentElement, childElements) {
 */
 function convertHashToID(ID){
     ID = ID.substr(1);
-    console.log(ID);
     return Number(ID);
 }
 
