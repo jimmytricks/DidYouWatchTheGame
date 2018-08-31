@@ -38,6 +38,7 @@
         <img src="img/logo-sm.png">
       </span>
       <select id="team-selector" onchange="init()">
+        <option value="0">Select Team</option>
         <option value="24">Anaheim Ducks</option>
         <option value="53">Arizona Coyotes</option>
         <option value="6">Boston Bruins</option>
@@ -70,7 +71,7 @@
         <option value="15">Washington Capitals</option>
         <option value="52">Winnipeg Jets</option>
       </select>
-      <h1>Team
+      <h1><span id="current-team-name"></span>
         <span class="header-subtitle">Snapshot</span>
       </h1>
     </header>
@@ -98,7 +99,7 @@
       </section>
       <section id="division-table">
         <h2>
-          <i class="fas fa-trophy"></i> <span id="division-table-name"></span> Division Table
+          <i class="fas fa-trophy"></i> <span id="division-table-name"></span> Division
         </h2>
         <div class="division-table-container">
           <ul id="division-table-header">
@@ -154,6 +155,7 @@
     </footer>
   </main>
 </body>
+<script src="JS/helpers.js"></script>
 <script src="JS/app.js" defer></script>
 
 </html>

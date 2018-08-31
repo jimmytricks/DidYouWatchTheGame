@@ -72,6 +72,16 @@ section {
     margin-left: 10px;
 }
 
+#current-team-name {
+    @extend .header-subtitle;
+}
+
+#team-selector {
+    background-color: #32292f;
+    color: white;
+    font-size: 0.9rem;
+}
+
 /* end header */
 
 /* footer */

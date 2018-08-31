@@ -1,371 +1,330 @@
-// Application configuration constants
 const CONFIG = {
     API_URL: "https://statsapi.web.nhl.com/",
     API_VERSION_PATH: "api/v1/",
     ENDPOINTS: {
-        SCHEDULE: "schedule",
-        STANDINGS_BY_DIVISION: "standings/byDivision"
+      SCHEDULE: "schedule",
+      STANDINGS_BY_DIVISION: "standings/byDivision"
     }
-}
-
-// Returns the current date in the format yyyy-dd-mm
-function getCurrentDateForUrl() {
-    const now = new Date();
-    let dd = now.getDate();
-    let mm = now.getMonth() + 1; // January is 0!
-    const yyyy = now.getFullYear();
-
-    // Add leading zeros if day or month is below 10
-    if (dd < 10) { dd = `0${dd}`; }
-    if (mm < 10) { mm = `0${mm}`; }
-
-    return `${yyyy}-${mm}-${dd}`;
-}
-
-// Log request response error
-function logError(error) {
-    console.error('Looks like there was a problem: \n', error);
-}
-
-// use Response interface to check if request is okay
-function validateResponse(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
+  };
+  
+  // Get latest fixtures
+  function getLatestFixtures(teamID) {
+    function onRequestedFixtureResponse(nextGameObject) {
+      function createFixture(game) {
+        // Get data from game object
+        const gameDateFormatted = formatDateToString(game.gameDate);
+        const textStringFixture = `${game.teams.home.team.name} vs ${
+          game.teams.away.team.name
+        }`;
+  
+        // create paragraph elements
+        const pNode = createElementWithText("p", gameDateFormatted);
+        const pNodeFixture = createElementWithText("p", textStringFixture);
+  
+        // create container div
+        const gameContainerNode = document.createElement("div");
+  
+        // append paragraph elements to container div
+        appendChildrenToElement(gameContainerNode, [pNode, pNodeFixture]);
+  
+        // add container to page
+        document.getElementById("next-fixture").appendChild(gameContainerNode);
+      }
+  
+      // get next 4 game fixtures
+      const game1 = nextGameObject.dates["0"].games["0"];
+      const game2 = nextGameObject.dates["1"].games["0"];
+      const game3 = nextGameObject.dates["2"].games["0"];
+      const game4 = nextGameObject.dates["3"].games["0"];
+      const nextFourGames = [game1, game2, game3, game4];
+      nextFourGames.forEach(createFixture);
     }
-    return response;
-}
-
-// Process the response and return JSON
-function readResponseAsJSON(response) {
-    return response.json();
-}
-
-// Fetch required JSON, ensure it is valid, parse to JSON then run callback function
-function fetchJSON(pathToResource, callback) {
-    fetch(pathToResource)
-        .then(validateResponse)
-        .then(readResponseAsJSON)
-        .then(callback)
-        .catch(logError);
-}
-
-// Get latest fixtures
-function getLatestFixtures(teamID) {
-    function onRequestedPreviousFixtures(nextGameObject) {
-
-        // get next 4 fixtures
-        function createGameDate(game) {
-            // format date 
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-            const gameDateFormatted = new Date(game.gameDate).toLocaleDateString('en', options);
-
-            // create paragraph elements
-            const pNode = document.createElement("p");
-            const pNodeFixture = document.createElement("p");
-
-            // create string to go into paragraph elements for both date and fixtures
-            const textStringDate = "" + gameDateFormatted;
-
-            const textStringFixture = "" + game.teams.home.team.name + " vs " + game.teams.away.team.name;
-
-            // create text node with date and fixture strings
-            const textNodeDate = document.createTextNode(textStringDate);
-            const textNodeFixture = document.createTextNode(textStringFixture);
-
-            // add date and fixture text nodes to respective paragraph elements
-            pNode.appendChild(textNodeDate);
-            pNodeFixture.appendChild(textNodeFixture);
-
-            // create container div
-            const gameContainerNode = document.createElement('div');
-
-            // append paragraph elements to container div and add to page
-            gameContainerNode.appendChild(pNode);
-            gameContainerNode.appendChild(pNodeFixture);
-            document.getElementById('next-fixture').appendChild(gameContainerNode);
-        }
-
-        // set game variables, run create game date function
-        const game1 = nextGameObject.dates["0"].games["0"];
-        const game2 = nextGameObject.dates["1"].games["0"];
-        const game3 = nextGameObject.dates["2"].games["0"];
-        const game4 = nextGameObject.dates["3"].games["0"];
-        const nextFourGames = [game1, game2, game3, game4];
-        nextFourGames.forEach(createGameDate);
-    };
-
+  
     // set date to today's date
     const dateToday = getCurrentDateForUrl();
-
-    // create url string (TODO: Add params support to fetchJSON to avoid param concatenation)
-    const fixturesURL = `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${CONFIG.ENDPOINTS.SCHEDULE}?teamId=${teamID}&startDate=${dateToday}&endDate=2019-01-12`
-
-    fetchJSON(fixturesURL, onRequestedPreviousFixtures);
-}
-
-// get last 4 results
-function getLatestResults(teamID) {
-    function onRequestedLatestResults(lastGameObject) {
-
-        // pass in element plus index for using as html id
-        function createGameDate(game, index) {
-            // format date 
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-            const gameDateFormatted = new Date(game.gameDate).toLocaleDateString('en', options);
-
-            // create paragraph elements
-            const pNode = document.createElement("p");
-            const pNodeFixture = document.createElement("p");
-            const pNodeResult = document.createElement("p");
-
-            // create string to go into paragraph elements for date, fixtures, results
-            const textStringDate = "" + gameDateFormatted;
-
-            let textStringResult = ""
-
-            // set vars to use in if statement below
-            const hockeyTeamID = game.teams.home.team.id;
-            const homeTeamScore = game.teams.home.score;
-            const awayTeamScore = game.teams.away.score;
-
-            // check for a draw
-            if (homeTeamScore === awayTeamScore) {
-                textStringResult = "Draw " + game.teams.home.score + ' - ' + game.teams.away.score;
-            }
-
-            // check if home team is the current team
-            if (hockeyTeamID == teamID) {
-                // if current team home score more than away, prefix with win if not loss
-                if (homeTeamScore > awayTeamScore) {
-                    textStringResult = "Win " + game.teams.home.score + ' - ' + game.teams.away.score;
-                } else {
-                    textStringResult = "Loss " + game.teams.home.score + ' - ' + game.teams.away.score;
-                }
-                // if current team are away team
-            } else {
-                // prefix with win if higher score, if not loss
-                if (homeTeamScore < awayTeamScore) {
-                    textStringResult = "Win " + game.teams.away.score + ' - ' + game.teams.home.score;
-                } else {
-                    textStringResult = "Loss " + game.teams.away.score + ' - ' + game.teams.home.score;
-                }
-            }
-
-            const textStringFixture = "" + game.teams.home.team.name + ' vs ' + game.teams.away.team.name;
-
-            // create text node with date and fixture strings
-            const textNodeDate = document.createTextNode(textStringDate);
-            const textNodeFixture = document.createTextNode(textStringFixture);
-            const textStringEndResult = document.createTextNode(textStringResult);
-
-            // add date and fixture text nodes to respective paragraph elements
-            pNode.appendChild(textNodeDate);
-            pNodeFixture.appendChild(textNodeFixture);
-            pNodeResult.appendChild(textStringEndResult);
-
-            // add class to score element for styling
-            pNodeResult.classList.add("result-score");
-
-            //create container div for result and score, add class and append result to it
-            const scoreAndHighlightContainer = document.createElement("div");
-            const uniqueContainerID = "score-highlight-container-" + index;
-            scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
-            scoreAndHighlightContainer.appendChild(pNodeResult);
-
-            // create container li
-            const gameContainerNode = document.createElement('li');
-
-            // append paragraph elements to container li and add to page
-            gameContainerNode.appendChild(pNode);
-            gameContainerNode.appendChild(pNodeFixture);
-            gameContainerNode.appendChild(scoreAndHighlightContainer);
-
-
-            // add to dynamic html ID using index, then append to LI element
-            const gameContainerNodeIDString = "last-fixture-" + index;
-            document.getElementById(gameContainerNodeIDString).appendChild(gameContainerNode);
-        }
-
-        // get the the last 4 games
-        let lastFourGamesArray = lastGameObject.dates;
-        lastFourGamesArray = lastFourGamesArray.slice(-4).reverse();
-
-        // set game variables, run create game date function
-        const game1 = lastFourGamesArray["0"].games["0"];
-        const game2 = lastFourGamesArray["1"].games["0"];
-        const game3 = lastFourGamesArray["2"].games["0"];
-        const game4 = lastFourGamesArray["3"].games["0"];
-        const nextFourGames = [game1, game2, game3, game4];
-        nextFourGames.forEach(createGameDate);
-
-        // run get highlights function
-        nextFourGames.forEach(getHighlights);
+  
+    // create url object with path and get parameters
+    const fixturesURL = {
+      path: `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${
+        CONFIG.ENDPOINTS.SCHEDULE
+      }`,
+      params: {
+        teamId: teamID,
+        startDate: dateToday,
+        endDate: "2019-01-12"
+      }
     };
-
+    fetchJSON(fixturesURL, onRequestedFixtureResponse);
+  }
+  
+  // get last 4 results
+  function getLatestResults(teamID) {
+    function onRequestedLatestResultsResponse(lastGameObject) {
+      // pass in element plus index for using as html id
+      function createLatestResult(game, index) {
+        const gameDateFormatted = formatDateToString(game.gameDate);
+  
+        let textStringResult = "";
+        const hockeyTeamID = game.teams.home.team.id;
+        const homeTeamScore = game.teams.home.score;
+        const awayTeamScore = game.teams.away.score;
+  
+        // check for a draw
+        if (homeTeamScore === awayTeamScore) {
+          textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
+        }
+  
+        // check if home team is the current team
+        if (hockeyTeamID == teamID) {
+          // if current team home score more than away, prefix with win if not loss
+          if (homeTeamScore > awayTeamScore) {
+            textStringResult = `Win ${homeTeamScore} - ${awayTeamScore}`;
+          } else {
+            textStringResult = `Loss ${homeTeamScore} - ${awayTeamScore}`;
+          }
+          // if current team are away team
+        } else {
+          // prefix with win if higher score, if not loss
+          if (homeTeamScore < awayTeamScore) {
+            textStringResult = `Win ${awayTeamScore} - ${homeTeamScore}`;
+          } else {
+            textStringResult = `Loss ${awayTeamScore} - ${homeTeamScore}`;
+          }
+        }
+  
+        const textStringFixture = `${game.teams.home.team.name} vs ${
+          game.teams.away.team.name
+        }`;
+  
+        // create paragraph elements with text
+        const pNode = createElementWithText("p", gameDateFormatted);
+        const pNodeFixture = createElementWithText("p", textStringFixture);
+        const pNodeResult = createElementWithText("p", textStringResult);
+  
+        // add class to score element for styling
+        pNodeResult.classList.add("result-score");
+  
+        //create container div for result and score, add class and append result to it
+        const scoreAndHighlightContainer = document.createElement("div");
+        const uniqueContainerID = `score-highlight-container-${index}`;
+        scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
+        scoreAndHighlightContainer.appendChild(pNodeResult);
+  
+        // create container li
+        const gameContainerNode = document.createElement("li");
+  
+        // append paragraph elements to container li and add to page
+        gameContainerNode.appendChild(pNode);
+        gameContainerNode.appendChild(pNodeFixture);
+        gameContainerNode.appendChild(scoreAndHighlightContainer);
+  
+        // add to dynamic html ID using index, then append to LI element
+        const gameContainerNodeIDString = `last-fixture-${index}`;
+        document
+          .getElementById(gameContainerNodeIDString)
+          .appendChild(gameContainerNode);
+      }
+  
+      // get the the last 4 games
+      let lastFourGamesArray = lastGameObject.dates.slice(-4).reverse();
+  
+      // set game variables, run create game date function
+      const game1 = lastFourGamesArray["0"].games["0"];
+      const game2 = lastFourGamesArray["1"].games["0"];
+      const game3 = lastFourGamesArray["2"].games["0"];
+      const game4 = lastFourGamesArray["3"].games["0"];
+      const nextFourGames = [game1, game2, game3, game4];
+      nextFourGames.forEach(createLatestResult);
+  
+      // run get highlights function
+      nextFourGames.forEach(getHighlights);
+    }
+  
     // set date to today's date
     const dateToday = getCurrentDateForUrl();
-
-    // create url string (TODO: Add params support to fetchJSON to avoid param concatenation)
-    const resultsURL = `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${CONFIG.ENDPOINTS.SCHEDULE}?teamId=${teamID}&startDate=2018-01-01&endDate=${dateToday}`
-
+  
+    // create url object with path and get parameters
+    const resultsURL = {
+      path: `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${
+        CONFIG.ENDPOINTS.SCHEDULE
+      }`,
+      params: {
+        teamId: teamID,
+        startDate: "2018-01-01",
+        endDate: dateToday
+      }
+    };
+  
     // Get latest results from API and process
-    fetchJSON(resultsURL, onRequestedLatestResults);
-}
-
-// get highlights from last results
-function getHighlights(highlights, index) {
-    function onRequestedHighlights(highlightObject) {
-
-        // get link
-        const extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
-
-        // create a link element to hold highlight URL
-        const a = document.createElement('a');
-        const aText = document.createTextNode('View Highlights');
-        a.appendChild(aText);
-        a.title = 'View game highlights';
-        a.setAttribute('target', '_blank');
-        a.href = extendedHighlightLink;
-
-        // add the a element to container with correct score
-        const highlightContainerNodeIDString = "score-highlight-container-" + index;
-        document.getElementById(highlightContainerNodeIDString).appendChild(a);
-    };
-
+    fetchJSON(resultsURL, onRequestedLatestResultsResponse);
+  }
+  
+  // get highlights from last results
+  function getHighlights(highlights, index) {
+    function onRequestedHighlightsResponse(highlightObject) {
+      // get link
+      const extendedHighlightLink =
+        highlightObject.media.epg[2].items[0].playbacks[9].url;
+  
+      // create a link element to hold highlight URL
+      const a = createElementWithText("a", "View Highlights");
+      a.title = "View game highlights";
+      a.setAttribute("target", "_blank");
+      a.href = extendedHighlightLink;
+  
+      // add the a element to container with correct score
+      const highlightContainerNodeIDString = `score-highlight-container-${index}`;
+      document.getElementById(highlightContainerNodeIDString).appendChild(a);
+    }
+  
     // access api link containing highlights info
-    const contentLinkUrl = CONFIG.API_URL + highlights['content']['link'];
-
+    const contentLinkUrl = CONFIG.API_URL + highlights["content"]["link"];
+  
     // Get content from API and process
-    fetchJSON(contentLinkUrl, onRequestedHighlights);
-};
-
-function getDivisionTable(teamID) {
-    function onRequestedDivisionTable(result) {
-        let divisionTableObject = result;
-        let divisionNumber;
-
-        // check which division the current team ID belongs to by looping through each
-        function checkWhichDivision(teamID) {
-            for (e = 0; e < divisionTableObject.records.length; e++) {
-                for (a = 0; a < divisionTableObject.records[e].teamRecords.length; a++) {
-                    if (teamID === divisionTableObject.records[e].teamRecords[a].team.id) {
-                        document.getElementById('division-table-name').innerText = divisionTableObject.records[e].division.name;
-
-                        // set division number to the iteration / index of correct array
-                        divisionNumber = e;
-
-                        // if division is central, remove 8th place from table
-                        if (divisionNumber == 2) {
-                            const hideExtraDivPosition = document.getElementById('division-table-8');
-                            hideExtraDivPosition.style.display = 'none';
-                        }
-                    }
-                }
+    fetchJSON(contentLinkUrl, onRequestedHighlightsResponse);
+  }
+  
+  function getDivisionTableAndSetTeamName(teamID) {
+    function onRequestedDivisionTableResponse(divisionTableObject) {
+      let divisionNumber;
+  
+      // check which division the current team ID belongs to by looping through each
+      function checkWhichDivision(teamID, records) {
+        for (let e = 0; e < records.length; e++) {
+          for (let a = 0; a < records[e].teamRecords.length; a++) {
+            if (teamID === records[e].teamRecords[a].team.id) {
+              document.getElementById("division-table-name").innerText =
+                records[e].division.name;
+  
+              // set division number to the iteration / index of correct array
+              divisionNumber = e;
+  
+              // if division is central, remove 8th place from table
+              if (divisionNumber == 2) {
+                const hideExtraDivPosition = document.getElementById(
+                  "division-table-8"
+                );
+                hideExtraDivPosition.style.display = "none";
+              }
             }
+          }
         }
-
-
-        checkWhichDivision(teamID);        
-        const divisionTeams = divisionTableObject.records[divisionNumber].teamRecords;
-        for (i = 0; i < divisionTeams.length; i++) {
-
-            // create list node and text, append text to node
-            const divisionTeamNameListItem = document.createElement('LI');
-
-            const divisionTeamTextNode = document.createTextNode(divisionTeams[i].team.name);
-            divisionTeamNameListItem.appendChild(divisionTeamTextNode);
-
-            // create string to grab league placing IDS
-            let divisionTableStandingIDString = "division-table-";
-
-            // increment by one for each league position, force it to a number. Increment one per for loop
-            let incrementByOneTogetPosition = 1;
-            incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
-
-            //  append the ID number onto table, add text node
-            divisionTableStandingIDString += incrementByOneTogetPosition;
-            document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamNameListItem);
-
-            // check if team is the canucks, add class to parent UL element for styling
-            if (divisionTeams[i].team.id == teamID) {
-                document.getElementById(divisionTableStandingIDString).className = 'currentteam-standing';
-            }
-
-            // add league points to standing table
-            function addLeaguePoints(leaguePoints) {
-
-                // create list node and text, append text to node
-                const divisionTeamPointsListItem = document.createElement('LI');
-                const divisionTeamPointsTextNode = document.createTextNode(divisionTeams[i][leaguePoints]);
-                divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
-
-                // create string to grab league placing IDS
-                let divisionTableStandingIDString = "division-table-";
-
-                // increment by one for each league position, force it to a number. Increment one per for loop
-                let incrementByOneTogetPosition = 1;
-                incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
-
-                //  append the ID number onto table, add text node
-                divisionTableStandingIDString += incrementByOneTogetPosition;
-                document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamPointsListItem);
-            }
-
-            addLeaguePoints('points');
-
-            //  add league stats, wins, losses and OT to table
-            function addLeagueStats(leagueStats) {
-
-                // create list node and text, append text to node
-                const divisionTeamPointsListItem = document.createElement('LI');
-                const divisionTeamPointsTextNode = document.createTextNode(divisionTeams[i].leagueRecord[leagueStats]);
-                divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
-
-                // create string to grab league placing IDS
-                let divisionTableStandingIDString = "division-table-";
-
-                // increment by one for each league position, force it to a number. Increment one per for loop
-                let incrementByOneTogetPosition = 1;
-                incrementByOneTogetPosition = incrementByOneTogetPosition + (Number([i]));
-
-                //  append the ID number onto table, add text node
-                divisionTableStandingIDString += incrementByOneTogetPosition;
-                document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamPointsListItem);
-            }
-
-            addLeagueStats('wins');
-            addLeagueStats('losses');
-            addLeagueStats('ot');
+      }
+      checkWhichDivision(teamID, divisionTableObject.records);
+  
+      const divisionTeams =
+        divisionTableObject.records[divisionNumber].teamRecords;
+      for (let i = 0; i < divisionTeams.length; i++) {
+        // create list node and text, append text to node
+        const divisionTeamNameListItem = createElementWithText(
+          "li", divisionTeams[i].team.name);
+  
+        // create string to grab league placing IDS
+        const divisionTableStandingIDString = `division-table-${i + 1}`;
+  
+        document.getElementById(divisionTableStandingIDString).appendChild(divisionTeamNameListItem);
+  
+        // check if team is the current selected team, add class to parent UL element for styling, also set title to correct team name
+          if (divisionTeams[i].team.id == teamID) {
+              document.getElementById(divisionTableStandingIDString).className =
+                  "currentteam-standing";
+                  
+              // set team name in DOM title
+              var setTeamName = document.getElementById('current-team-name');
+              setTeamName.innerText = divisionTeams[i].team.name;
+          }
+  
+        // add league points to standing table
+        function addLeaguePoints(leaguePoints) {
+          // create list node and text, append text to node
+          const divisionTeamPointsListItem = createElementWithText(
+            "li",
+            divisionTeams[i][leaguePoints]
+          );
+  
+          // create string to grab league placing IDS
+          const divisionTableStandingIDString = `division-table-${i + 1}`;
+  
+          document
+            .getElementById(divisionTableStandingIDString)
+            .appendChild(divisionTeamPointsListItem);
         }
+  
+        addLeaguePoints("points");
+  
+        //  add league stats, wins, losses and OT to table
+        function addLeagueStats(leagueStats) {
+          // create list node and text, append text to node
+          const divisionTeamPointsListItem = document.createElement("li");
+          const divisionTeamPointsTextNode = document.createTextNode(
+            divisionTeams[i].leagueRecord[leagueStats]
+          );
+          divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
+  
+          // create string to grab league placing IDS
+          const divisionTableStandingIDString = `division-table-${i + 1}`;
+  
+          document
+            .getElementById(divisionTableStandingIDString)
+            .appendChild(divisionTeamPointsListItem);
+        }
+  
+        addLeagueStats("wins");
+        addLeagueStats("losses");
+        addLeagueStats("ot");
+      }
+    }
+  
+    // Create URL string
+    let divisionTableURL = `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${
+      CONFIG.ENDPOINTS.STANDINGS_BY_DIVISION
+    }`;
+  
+    // Get division table data from API
+    fetchJSON(divisionTableURL, onRequestedDivisionTableResponse);
+  }
+  
+  // Initialise the app
+  function init() {
+
+    // set team ID to select option's value
+    const currentTeamSelected = Number(
+        document.getElementById("team-selector").value
+      );
+      
+    // save hash ID of browser URL 
+    let hashID = window.location.hash;
+
+
+    // if select option is not 'select a team' run with that number
+    if (currentTeamSelected !== 0){
+        runApp(currentTeamSelected);
+
+        // add the hash to URL, to allow for bookmarking etc
+        window.location.hash = currentTeamSelected;
     }
 
-    // Create URL string
-    let divisionTableURL = `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${CONFIG.ENDPOINTS.STANDINGS_BY_DIVISION}`
+    // If there is hash ID preent in URL, use this for team ID
+    else if (hashID) {
 
-    // Get division table data from API
-    fetchJSON(divisionTableURL, onRequestedDivisionTable);
-}
-
-
-function resetInfo() {
-    // function to reset the values to default
-}
-
-// Initialise the app using the currently selected team
-function init() {
-    const currentTeamSelected = Number(document.getElementById("team-selector").value);
-    runApp(currentTeamSelected);
-}
-
-// Run application
-function runApp(teamID) {
-    resetInfo();
-    getLatestFixtures(teamID);
-    getLatestResults(teamID);
-    getDivisionTable(teamID);
-}
-
-// Trigger running of app when DOM loaded 
-document.addEventListener('DOMContentLoaded', function () {
+        // convert ID in url to number (remove the hash)
+        teamIDFromHash = convertHashToID(hashID);
+        runApp(teamIDFromHash);
+    }
+    else {
+        // run with Canucks as a default
+        runApp(23);
+    }
+  }
+  
+  // Run application
+  function runApp(teamID) {   
+            getLatestFixtures(teamID);
+            getLatestResults(teamID);
+            getDivisionTableAndSetTeamName(teamID);
+  }
+  
+  // Trigger running of app when DOM loaded (might not need this event wrapper)
+  document.addEventListener("DOMContentLoaded", function() {
     init();
-});
+  });
