@@ -24,4 +24,6 @@ AJAX XMLHttpRequests to the NHL API to get information on Upcoming Fixtures, Pre
 [NHL API unofficial documentation](https://gitlab.com/dword4/nhlapi)
 
 
+# Development
 
+Run `npm install` to get dependencies followed by `gulp` or `npm run serve` to start server.

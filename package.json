@@ -1,0 +1,20 @@
+{
+  "name": "CanucksHockey",
+  "version": "1.0.0",
+  "author": "Hixie4",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "gulp"
+  },
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "1.0.0",
+    "gulp-imports": "0.0.3",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^2.1.0",
+    "gulp-uglify": "^1.3.0"
+  }
+}
