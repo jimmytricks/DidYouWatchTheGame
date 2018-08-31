@@ -7,6 +7,7 @@ const CONFIG = {
     }
 }
 
+// Returns the current date in the format yyyy-dd-mm
 function getCurrentDateForUrl() {
     const now = new Date();
     let dd = now.getDate();
@@ -20,6 +21,7 @@ function getCurrentDateForUrl() {
     return `${yyyy}-${mm}-${dd}`;
 }
 
+// Log request response error
 function logError(error) {
     console.error('Looks like there was a problem: \n', error);
 }
@@ -32,7 +34,7 @@ function validateResponse(response) {
     return response;
 }
 
-// parses response as JSON
+// Process the response and return JSON
 function readResponseAsJSON(response) {
     return response.json();
 }
@@ -46,7 +48,7 @@ function fetchJSON(pathToResource, callback) {
         .catch(logError);
 }
 
-
+// Get latest fixtures
 function getLatestFixtures(teamID) {
     function onRequestedPreviousFixtures(result) {
         if (!result) { return; }
@@ -352,11 +354,13 @@ function resetInfo() {
     // function to reset the values to default
 }
 
+// Initialise the app using the currently selected team
 function init() {
     const currentTeamSelected = Number(document.getElementById("team-selector").value);
     runApp(currentTeamSelected);
 }
 
+// Run application
 function runApp(teamID) {
     resetInfo();
     getLatestFixtures(teamID);
@@ -364,6 +368,7 @@ function runApp(teamID) {
     getDivisionTable(teamID);
 }
 
+// Trigger running of app when DOM loaded 
 document.addEventListener('DOMContentLoaded', function () {
     init();
 });
