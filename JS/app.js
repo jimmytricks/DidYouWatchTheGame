@@ -1,3 +1,4 @@
+// Application configuration constants
 const CONFIG = {
     API_URL: "https://statsapi.web.nhl.com/",
     API_VERSION_PATH: "api/v1/",
