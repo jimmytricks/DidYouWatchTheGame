@@ -152,5 +152,6 @@ function convertHashToID(ID){
  *
 */
 function resetInfo (){
-
+    // document.getElementById('next-fixture')
+    location.reload();
 }

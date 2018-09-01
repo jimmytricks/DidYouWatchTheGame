@@ -286,7 +286,7 @@ const CONFIG = {
   
   // Initialise the app
   function init() {
-
+    console.log('standard init ran')
     // set team ID to select option's value
     const currentTeamSelected = Number(
         document.getElementById("team-selector").value
@@ -318,13 +318,20 @@ const CONFIG = {
   }
   
   // Run application
-  function runApp(teamID) {   
+  function runApp(teamID) {              
             getLatestFixtures(teamID);
             getLatestResults(teamID);
             getDivisionTableAndSetTeamName(teamID);
+  }
+
+  // if select is used, reload page and run as usual
+  function initSelect(){
+    location.reload();
+    init();
   }
   
   // Trigger running of app when DOM loaded (might not need this event wrapper)
   document.addEventListener("DOMContentLoaded", function() {
     init();
   });
+
