@@ -160,15 +160,15 @@ function resetInfo (){
  *
 */
 function updateTeamColours (teamID){
-    let primaryTeamColour;
+    let secondaryTeamColour;
     
     for (let a = 0; a < teams.length; a++){
         if (teams[a].id == teamID){
-            primaryTeamColour = teams[a].colours.hex[0];
-            console.log(`${primaryTeamColour}`);            
+            secondaryTeamColour = teams[a].colours.hex[0];
+            console.log(`${secondaryTeamColour}`);            
         }
     }
 
     let el = document.querySelector('html');
-    el.style.setProperty('--secondary-team-colour',  `#${primaryTeamColour}`);
+    el.style.setProperty('--secondary-team-colour',  `#${secondaryTeamColour}`);
 }
