@@ -209,7 +209,8 @@ section {
 }
 
 #division-table {
-    background-color:$secondary-colour;
+    // background-color:$secondary-colour;
+    background-color:var(--secondary-team-colour);
     p, li {
         font-size:$font-size-smaller;
     }

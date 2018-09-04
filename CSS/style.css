@@ -330,6 +330,10 @@ template {
   display: none;
 }
 
+:root {
+  --secondary-team-colour:pink;
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -521,7 +525,7 @@ section h2 {
 }
 
 #division-table {
-  background-color: #002d55;
+  background-color: var(--secondary-team-colour);
 }
 #division-table p, #division-table li {
   font-size: 14px;
