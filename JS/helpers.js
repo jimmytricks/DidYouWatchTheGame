@@ -164,12 +164,11 @@ function updateTeamColours (teamID){
     
     for (let a = 0; a < teams.length; a++){
         if (teams[a].id == teamID){
-            debugger;
             primaryTeamColour = teams[a].colours.hex[0];
-            console.log(primaryTeamColour);
+            console.log(`${primaryTeamColour}`);            
         }
     }
 
     let el = document.querySelector('html');
-    el.style.setProperty('--secondary-team-colour',  `{$primaryTeamColour}`);
+    el.style.setProperty('--secondary-team-colour',  `#${primaryTeamColour}`);
 }

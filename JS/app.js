@@ -291,9 +291,6 @@ const CONFIG = {
     const currentTeamSelected = Number(
         document.getElementById("team-selector").value
       );
-
-
-    updateTeamColours(currentTeamSelected);
       
     // save hash ID of browser URL 
     let hashID = window.location.hash;
@@ -325,6 +322,7 @@ const CONFIG = {
             getLatestFixtures(teamID);
             getLatestResults(teamID);
             getDivisionTableAndSetTeamName(teamID);
+            updateTeamColours(teamID);
   }
 
   // if select is used, reload page and run as usual
