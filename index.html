@@ -37,7 +37,7 @@
       <span class="logo">
         <img src="img/logo-sm.png">
       </span>
-      <select id="team-selector" onchange="initSelect()">
+      <select id="team-selector" onchange="initSelect(this.value)">
         <option value="0">Select Team</option>
         <option value="24">Anaheim Ducks</option>
         <option value="53">Arizona Coyotes</option>
@@ -155,6 +155,7 @@
     </footer>
   </main>
 </body>
+<script src="JS/teams.js"></script>
 <script src="JS/helpers.js"></script>
 <script src="JS/app.js" defer></script>
 

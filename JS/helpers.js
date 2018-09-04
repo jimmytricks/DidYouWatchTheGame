@@ -152,6 +152,24 @@ function convertHashToID(ID){
  *
 */
 function resetInfo (){
-    // document.getElementById('next-fixture')
     location.reload();
+}
+
+/**
+ * Update team colours
+ *
+*/
+function updateTeamColours (teamID){
+    let primaryTeamColour;
+    
+    for (let a = 0; a < teams.length; a++){
+        if (teams[a].id == teamID){
+            debugger;
+            primaryTeamColour = teams[a].colours.hex[0];
+            console.log(primaryTeamColour);
+        }
+    }
+
+    let el = document.querySelector('html');
+    el.style.setProperty('--secondary-team-colour',  `{$primaryTeamColour}`);
 }
