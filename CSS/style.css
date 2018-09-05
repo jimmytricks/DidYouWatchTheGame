@@ -331,7 +331,8 @@ template {
 }
 
 :root {
-  --secondary-team-colour:blue;
+  --primary-team-colour:$primary-colour;
+  --secondary-team-colour:$secondary-colour;
 }
 
 html, body {
@@ -433,8 +434,9 @@ section h2 {
 }
 
 /* end footer */
+/* next fixure */
 #next-fixture {
-  background-color: #008852;
+  background-color: var(--primary-team-colour);
 }
 #next-fixture h2 {
   color: white;

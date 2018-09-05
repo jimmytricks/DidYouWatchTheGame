@@ -108,9 +108,10 @@ section {
 
 /* end footer */
 
+/* next fixure */
 
 #next-fixture {
-    background-color:$primary-colour;
+    background-color:var(--primary-team-colour);
     h2 {
         color:$white;
         letter-spacing: 1.5px;

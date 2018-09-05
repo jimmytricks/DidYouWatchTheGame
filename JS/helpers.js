@@ -160,15 +160,30 @@ function resetInfo (){
  *
 */
 function updateTeamColours (teamID){
-    let secondaryTeamColour;
+
+    let primaryTeamColour, secondaryTeamColour;
+    let el = document.querySelector('html');
+    defaultSecondaryColour = '#D3D3D3';
     
+    // loop through team IDs to match current team, change primaryTeamColour CSS var to team colours. Need a break in for loop?
     for (let a = 0; a < teams.length; a++){
         if (teams[a].id == teamID){
-            secondaryTeamColour = teams[a].colours.hex[0];
-            console.log(`${secondaryTeamColour}`);            
+            primaryTeamColour = teams[a].colours.hex[0];
+            console.log(`${primaryTeamColour}`);            
         }
-    }
-
-    let el = document.querySelector('html');
+    }  
+    el.style.setProperty('--primary-team-colour',  `#${primaryTeamColour}`);
+    
+    // same as above, but checks for second colour being present
+    for (let a = 0; a < teams.length; a++){
+        if (teams[a].id == teamID){
+            if (teams[a].colours.hex[1]) {
+                secondaryTeamColour = teams[a].colours.hex[1];
+                console.log(`${secondaryTeamColour}`);  
+            } else {
+                secondaryTeamColour = defaultSecondaryColour;
+            }
+        }
+    }    
     el.style.setProperty('--secondary-team-colour',  `#${secondaryTeamColour}`);
 }
