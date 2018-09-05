@@ -163,7 +163,7 @@ function updateTeamColours (teamID){
 
     let primaryTeamColour, secondaryTeamColour;
     let el = document.querySelector('html');
-    defaultSecondaryColour = 'D3D3D3';
+    defaultSecondaryColour = '5E4E59';
     
     // loop through team IDs to match current team, change primaryTeamColour CSS var to team colours. Need a break in for loop?
     for (let a = 0; a < teams.length; a++){
