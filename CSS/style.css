@@ -333,7 +333,7 @@ template {
 :root {
   --primary-team-colour:$primary-colour;
   --secondary-team-colour:$secondary-colour;
-  --secondary-team-colour:$tertiary-colour;
+  --tertiary-team-colour:$tertiary-colour;
 }
 
 html, body {
@@ -606,4 +606,4 @@ section h2 {
   }
 }
 
-/*# sourceMappingURL=CSS/style.css.map */
+/*# sourceMappingURL=style.css.map */
