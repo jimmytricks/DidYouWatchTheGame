@@ -228,7 +228,7 @@ const teams = [
         name: "Vancouver Canucks",
         league: "nhl",
         colours: {
-            hex: ["00205b", "97999b", "041c2c"]
+            hex: ["008852", "002d55", "041c2c"]
         }
     },
     {

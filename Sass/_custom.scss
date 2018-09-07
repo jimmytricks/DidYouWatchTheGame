@@ -97,7 +97,7 @@ section {
     a {
         color:white;
         &:hover{
-            color:$primary-colour;
+            color:var(--primary-team-colour);
         }
     }
 }
@@ -132,13 +132,13 @@ section {
 
 #last-fixtures {
     background-color:$white;
-    color:$secondary-colour;
+    color:var(--secondary-team-colour);;
     p {
         margin: 5px 0;
     }
     p.result-score {
         width: 150px;
-        background-color: $secondary-colour;
+        background-color: var(--secondary-team-colour);;
         color:$white;
         margin:0;
         margin-right:10px;
@@ -151,7 +151,7 @@ section {
             content: 'View Score';
             width: 150px;
             display: block;
-            background-color: $primary-colour;
+            background-color: var(--primary-team-colour);
             z-index: 10;
             position: absolute;
             bottom: 0;
@@ -162,15 +162,15 @@ section {
             transition: all 0.5s ease-in-out;
         }
         &:hover:after {
-            background-color:$secondary-colour;
+            background-color:var(--secondary-team-colour);;
             visibility:hidden;
         }
     }
     h2 {
-        border-bottom: 5px solid $primary-colour;
+        border-bottom: 5px solid var(--primary-team-colour);
     }
     a {
-        background-color:$secondary-colour;
+        background-color:var(--secondary-team-colour);;
         color:$white;
         text-decoration: none;
         padding: 8px;
@@ -203,14 +203,14 @@ section {
 }
 
 .currentteam-standing {
-    background-color:$primary-colour;
+    background-color:var(--primary-team-colour);
     li { 
     font-weight:900;
     }
 }
 
 #division-table {
-    // background-color:$secondary-colour;
+    // background-color:var(--secondary-team-colour);;
     background-color:var(--secondary-team-colour);
     p, li {
         font-size:$font-size-smaller;

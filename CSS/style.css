@@ -426,7 +426,7 @@ section h2 {
   color: white;
 }
 .footer a:hover {
-  color: #008852;
+  color: var(--primary-team-colour);
 }
 
 .zu-container p {
@@ -455,14 +455,14 @@ section h2 {
 
 #last-fixtures {
   background-color: white;
-  color: #002d55;
+  color: var(--secondary-team-colour);
 }
 #last-fixtures p {
   margin: 5px 0;
 }
 #last-fixtures p.result-score {
   width: 150px;
-  background-color: #002d55;
+  background-color: var(--secondary-team-colour);
   color: white;
   margin: 0;
   margin-right: 10px;
@@ -476,7 +476,7 @@ section h2 {
   content: "View Score";
   width: 150px;
   display: block;
-  background-color: #008852;
+  background-color: var(--primary-team-colour);
   z-index: 10;
   position: absolute;
   bottom: 0;
@@ -487,14 +487,14 @@ section h2 {
   transition: all 0.5s ease-in-out;
 }
 #last-fixtures p.result-score:hover:after {
-  background-color: #002d55;
+  background-color: var(--secondary-team-colour);
   visibility: hidden;
 }
 #last-fixtures h2 {
-  border-bottom: 5px solid #008852;
+  border-bottom: 5px solid var(--primary-team-colour);
 }
 #last-fixtures a {
-  background-color: #002d55;
+  background-color: var(--secondary-team-colour);
   color: white;
   text-decoration: none;
   padding: 8px;
@@ -520,7 +520,7 @@ section h2 {
 }
 
 .currentteam-standing {
-  background-color: #008852;
+  background-color: var(--primary-team-colour);
 }
 .currentteam-standing li {
   font-weight: 900;
