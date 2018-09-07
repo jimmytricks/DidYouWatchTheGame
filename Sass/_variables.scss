@@ -8,7 +8,7 @@ $font-size-smaller: 14px;
 
 $primary-colour:#008852;
 $secondary-colour:#002d55;
-$tertiary-colour:#315659;
+$tertiary-colour:white;;
 $darker-white: #C6D4FF;
 $lighter-white:#EAE8FF;
 $white:white;
@@ -20,5 +20,6 @@ $black:#32292F;
 :root {
     --primary-team-colour:$primary-colour;
     --secondary-team-colour:$secondary-colour;
+    --secondary-team-colour:$tertiary-colour;
 }
 

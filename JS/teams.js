@@ -4,7 +4,7 @@ const teams = [
         name: "Anaheim Ducks",
         league: "nhl",
         colours: {
-            hex: ["010101", "a2aaad", "fc4c02", "85714d"]
+            hex: ["a2aaad", "fc4c02", "85714d"]
         }
     },
     {
@@ -12,7 +12,7 @@ const teams = [
         name: "Arizona Coyotes",
         league: "nhl",
         colours: {
-            hex: ["010101", "862633", "ddcba4"]
+            hex: ["862633", "ddcba4"]
         }
     },
     {
@@ -20,7 +20,7 @@ const teams = [
         name: "Boston Bruins",
         league: "nhl",
         colours: {
-            hex: ["010101", "ffb81c"]
+            hex: ["ffb81c"]
         }
     },
     {
@@ -36,7 +36,7 @@ const teams = [
         name: "Calgary Flames",
         league: "nhl",
         colours: {
-            hex: ["010101", "f1be48", "c8102e"]
+            hex: ["f1be48", "c8102e"]
         }
     },
     {
@@ -44,7 +44,7 @@ const teams = [
         name: "Carolina Hurricanes",
         league: "nhl",
         colours: {
-            hex: ["010101", "a2aaad", "c8102e"]
+            hex: ["a2aaad", "c8102e"]
         }
     },
     {
@@ -53,7 +53,6 @@ const teams = [
         league: "nhl",
         colours: {
             hex: [
-                "010101",
                 "ff671f",
                 "ffd100",
                 "001871",
@@ -68,7 +67,7 @@ const teams = [
         name: "Colorado Avalanche",
         league: "nhl",
         colours: {
-            hex: ["010101", "236192", "a4a9ad", "6f263d"]
+            hex: ["236192", "a4a9ad", "6f263d"]
         }
     },
     {
@@ -84,7 +83,7 @@ const teams = [
         name: "Dallas Stars",
         league: "nhl",
         colours: {
-            hex: ["010101", "006341", "8a8d8f"]
+            hex: ["006341", "8a8d8f"]
         }
     },
     {
@@ -116,7 +115,7 @@ const teams = [
         name: "Los Angeles Kings",
         league: "nhl",
         colours: {
-            hex: ["010101", "a2aaad"]
+            hex: ["a2aaad"]
         }
     },
     {
@@ -148,7 +147,7 @@ const teams = [
         name: "New Jersey Devils",
         league: "nhl",
         colours: {
-            hex: ["010101", "c8102e"]
+            hex: ["c8102e"]
         }
     },
     {
@@ -172,7 +171,7 @@ const teams = [
         name: "Ottawa Senators",
         league: "nhl",
         colours: {
-            hex: ["010101", "c8102e", "c69214"]
+            hex: ["c8102e", "c69214"]
         }
     },
     {
@@ -180,7 +179,7 @@ const teams = [
         name: "Philadelphia Flyers",
         league: "nhl",
         colours: {
-            hex: ["010101", "fa4616"]
+            hex: ["fa4616"]
         }
     },
     {
@@ -188,7 +187,7 @@ const teams = [
         name: "Pittsburgh Penguins",
         league: "nhl",
         colours: {
-            hex: ["010101", "ffb81c"]
+            hex: ["ffb81c"]
         }
     },
     {
@@ -204,7 +203,7 @@ const teams = [
         name: "San Jose Sharks",
         league: "nhl",
         colours: {
-            hex: ["010101", "e57200", "006272"]
+            hex: ["e57200", "006272"]
         }
     },
     {
@@ -228,7 +227,7 @@ const teams = [
         name: "Vancouver Canucks",
         league: "nhl",
         colours: {
-            hex: ["008852", "002d55", "041c2c"]
+            hex: ["008852", "002d55"]
         }
     },
     {
@@ -236,7 +235,7 @@ const teams = [
         name: "Vegas Golden Knights",
         league: "nhl",
         colours: {
-            hex: ["010101", "b4975a", "333f42"]
+            hex: ["b4975a", "333f42"]
         }
     },
     {

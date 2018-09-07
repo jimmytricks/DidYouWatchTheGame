@@ -131,14 +131,14 @@ section {
 // Last fixtures
 
 #last-fixtures {
-    background-color:$white;
-    color:var(--secondary-team-colour);;
+    background-color:var(--tertiary-team-colour);
+    color:var(--secondary-team-colour);
     p {
         margin: 5px 0;
     }
     p.result-score {
         width: 150px;
-        background-color: var(--secondary-team-colour);;
+        background-color: var(--secondary-team-colour);
         color:$white;
         margin:0;
         margin-right:10px;
@@ -162,7 +162,7 @@ section {
             transition: all 0.5s ease-in-out;
         }
         &:hover:after {
-            background-color:var(--secondary-team-colour);;
+            background-color:var(--secondary-team-colour);
             visibility:hidden;
         }
     }
@@ -170,7 +170,7 @@ section {
         border-bottom: 5px solid var(--primary-team-colour);
     }
     a {
-        background-color:var(--secondary-team-colour);;
+        background-color:var(--secondary-team-colour);
         color:$white;
         text-decoration: none;
         padding: 8px;
@@ -210,7 +210,7 @@ section {
 }
 
 #division-table {
-    // background-color:var(--secondary-team-colour);;
+    // background-color:var(--secondary-team-colour);
     background-color:var(--secondary-team-colour);
     p, li {
         font-size:$font-size-smaller;
