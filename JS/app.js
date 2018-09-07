@@ -104,10 +104,12 @@ const CONFIG = {
         // add class to score element for styling
         pNodeResult.classList.add("result-score");
   
-        //create container div for result and score, add class and append result to it
+        //create container div for result and score, add ID + class and append result to it
         const scoreAndHighlightContainer = document.createElement("div");
         const uniqueContainerID = `score-highlight-container-${index}`;
+        const uniqueContainerClass = `score-highlight-container`;
         scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
+        scoreAndHighlightContainer.setAttribute("class", uniqueContainerClass)
         scoreAndHighlightContainer.appendChild(pNodeResult);
   
         // create container li
