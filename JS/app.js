@@ -4,6 +4,10 @@ const CONFIG = {
     ENDPOINTS: {
       SCHEDULE: "schedule",
       STANDINGS_BY_DIVISION: "standings/byDivision"
+    },
+    ELEMENTS: {
+      TITLE_PRE_TEXT:'Did You Watch The Game?',
+      TITLE_POST_TEXT:' Fixtures, Results and Highlights'
     }
   };
   
@@ -231,9 +235,8 @@ const CONFIG = {
               document.getElementById(divisionTableStandingIDString).className =
                   "currentteam-standing";
                   
-              // set team name in DOM title
-              var setTeamName = document.getElementById('current-team-name');
-              setTeamName.innerText = divisionTeams[i].team.name;
+              // set team name in DOM title              
+              document.title = `${CONFIG.ELEMENTS.TITLE_PRE_TEXT} ${divisionTeams[i].team.name} ${CONFIG.ELEMENTS.TITLE_POST_TEXT}`;
           }
   
         // add league points to standing table
