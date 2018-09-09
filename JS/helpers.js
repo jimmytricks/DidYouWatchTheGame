@@ -170,8 +170,7 @@ function updateTeamColours (teamID){
     // loop through team IDs to match current team, change primaryTeamColour CSS var to team colours. Need a break in for loop?
     for (let a = 0; a < teams.length; a++){
         if (teams[a].id == teamID){
-            primaryTeamColour = teams[a].colours.hex[0];
-            console.log(`${primaryTeamColour}`);            
+            primaryTeamColour = teams[a].colours.hex[0];          
         }
     }  
     el.style.setProperty('--primary-team-colour',  `#${primaryTeamColour}`);
@@ -181,7 +180,6 @@ function updateTeamColours (teamID){
         if (teams[a].id == teamID){
             if (teams[a].colours.hex[1]) {
                 secondaryTeamColour = teams[a].colours.hex[1];
-                console.log(`${secondaryTeamColour}`);  
             } else {
                 secondaryTeamColour = defaultSecondaryColour;
             }
@@ -194,7 +192,6 @@ function updateTeamColours (teamID){
         if (teams[a].id == teamID){
             if (teams[a].colours.hex[2]) {
                 tertiaryTeamColour = teams[a].colours.hex[2];
-                console.log(`${tertiaryTeamColour}`);  
             } else {
                 tertiaryTeamColour = defaultTertiaryColour;
             }
