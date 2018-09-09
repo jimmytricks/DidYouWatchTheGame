@@ -358,6 +358,7 @@ a {
 section {
   padding: 20px 40px;
   flex-grow: 1;
+  flex-basis: 33%;
 }
 section li {
   list-style-type: none;
