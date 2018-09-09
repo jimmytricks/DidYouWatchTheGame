@@ -276,7 +276,7 @@ const CONFIG = {
         addLeagueStats("ot");
       }
     }
-  
+    
     // Create URL string
     let divisionTableURL = `${CONFIG.API_URL}${CONFIG.API_VERSION_PATH}${
       CONFIG.ENDPOINTS.STANDINGS_BY_DIVISION
@@ -285,10 +285,14 @@ const CONFIG = {
     // Get division table data from API
     fetchJSON(divisionTableURL, onRequestedDivisionTableResponse);
   }
+
+  // set the select HTML select option to match team ID
+  function setSelectID(teamID){
+      document.getElementById("team-selector").value = teamID;
+  }
   
   // Initialise the app
   function init() {
-    console.log('standard init ran')
     // set team ID to select option's value
     const currentTeamSelected = Number(
         document.getElementById("team-selector").value
@@ -306,7 +310,7 @@ const CONFIG = {
         window.location.hash = currentTeamSelected;
     }
 
-    // If there is hash ID preent in URL, use this for team ID
+    // If there is hash ID present in URL, use this for team ID
     else if (hashID) {
 
         // convert ID in url to number (remove the hash)
@@ -316,6 +320,7 @@ const CONFIG = {
     else {
         // run with Canucks as a default
         runApp(23);
+        window.location.hash = 23;
     }
   }
   
@@ -325,6 +330,7 @@ const CONFIG = {
             getLatestResults(teamID);
             getDivisionTableAndSetTeamName(teamID);
             updateTeamColours(teamID);
+            setSelectID(teamID);
   }
 
   // if select is used, reload page and run as usual

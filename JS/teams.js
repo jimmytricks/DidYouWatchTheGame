@@ -52,7 +52,7 @@ const teams = [
         name: "Chicago Blackhawks",
         league: "nhl",
         colours: {
-            hex: [ "CF0A2C","FFFFFF","010101"]
+            hex: [ "CF0A2C","010101","FFFFFF"]
         }
     },
     {
