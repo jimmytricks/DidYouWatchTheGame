@@ -357,6 +357,7 @@ a {
 
 section {
   padding: 20px 40px;
+  min-width: 260px;
   flex-grow: 1;
   flex-basis: 33%;
 }
