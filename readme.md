@@ -1,6 +1,6 @@
 # Description
 
-Single page application that utilizes the NHL REST API to show the Canucks upcoming fixtures, previous results and higlights, and the current standing of the relevant regional NHL table. 
+Single page application that utilizes the NHL REST API to show upcoming fixtures, previous results and higlights for whichever team is select, and the current standing of the relevant regional NHL table. 
 
 # Built with
 
