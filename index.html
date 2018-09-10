@@ -35,55 +35,62 @@
 <body>
   <main class="wrapper">
     <header class="header">
+      <section>
       <span class="logo">
         <img src="img/logo-sm.png">
       </span>
-      <select id="team-selector" onchange="initSelect()">
-        <option value="0">Select Team</option>
-        <option value="24">Anaheim Ducks</option>
-        <option value="53">Arizona Coyotes</option>
-        <option value="6">Boston Bruins</option>
-        <option value="7">Buffalo Sabres</option>
-        <option value="20">Calgary Flames</option>
-        <option value="12">Carolina Hurricanes</option>
-        <option value="16">Chicago Blackhawks</option>
-        <option value="21">Colorado Avalanche</option>
-        <option value="29">Columbus Blue Jackets</option>
-        <option value="25">Dallas Stars</option>
-        <option value="17">Detroit Red Wings</option>
-        <option value="22">Edmonton Oilers</option>
-        <option value="13">Florida Panthers</option>
-        <option value="26">Los Angeles Kings</option>
-        <option value="30">Minnesota Wild</option>
-        <option value="8">Montreal Canadiens</option>
-        <option value="18">Nashville Predators</option>
-        <option value="1">New Jersey Devils</option>
-        <option value="2">New York Islanders</option>
-        <option value="3">New York Rangers</option>
-        <option value="9">Ottawa Senators</option>
-        <option value="4">Philadelphia Flyers</option>
-        <option value="5">Pittsburgh Penguins</option>
-        <option value="19">Saint Louis Blues</option>
-        <option value="28">San Jose Sharks</option>
-        <option value="14">Tampa Bay Lighting</option>
-        <option value="10">Toronto Maple Leafs</option>
-        <option value="23">Vancouver Canucks</option>
-        <option value="54">Vegas Golden Knights</option>
-        <option value="15">Washington Capitals</option>
-        <option value="52">Winnipeg Jets</option>
-      </select>
-      <h1>
-        <span class="header-subtitle">Snapshot</span>
-      </h1>
+    </section>
+      <section class="header-title-container">
+        <select id="team-selector" onchange="initSelect()">
+          <option value="0">Select Team</option>
+          <option value="24">Anaheim Ducks</option>
+          <option value="53">Arizona Coyotes</option>
+          <option value="6">Boston Bruins</option>
+          <option value="7">Buffalo Sabres</option>
+          <option value="20">Calgary Flames</option>
+          <option value="12">Carolina Hurricanes</option>
+          <option value="16">Chicago Blackhawks</option>
+          <option value="21">Colorado Avalanche</option>
+          <option value="29">Columbus Blue Jackets</option>
+          <option value="25">Dallas Stars</option>
+          <option value="17">Detroit Red Wings</option>
+          <option value="22">Edmonton Oilers</option>
+          <option value="13">Florida Panthers</option>
+          <option value="26">Los Angeles Kings</option>
+          <option value="30">Minnesota Wild</option>
+          <option value="8">Montreal Canadiens</option>
+          <option value="18">Nashville Predators</option>
+          <option value="1">New Jersey Devils</option>
+          <option value="2">New York Islanders</option>
+          <option value="3">New York Rangers</option>
+          <option value="9">Ottawa Senators</option>
+          <option value="4">Philadelphia Flyers</option>
+          <option value="5">Pittsburgh Penguins</option>
+          <option value="19">Saint Louis Blues</option>
+          <option value="28">San Jose Sharks</option>
+          <option value="14">Tampa Bay Lighting</option>
+          <option value="10">Toronto Maple Leafs</option>
+          <option value="23">Vancouver Canucks</option>
+          <option value="54">Vegas Golden Knights</option>
+          <option value="15">Washington Capitals</option>
+          <option value="52">Winnipeg Jets</option>
+        </select>
+        <h1>
+          <span class="header-subtitle">Snapshot</span>
+        </h1>
+    </section>
+    <section class="top-right-header">
+
+    </section>
     </header>
 
     <div class="container">
-      <section id="next-fixture">
+      <section id="next-fixture" class="main-features">
         <h2>
           <i class="far fa-calendar-alt"></i> Next Fixtures
         </h2>
       </section>
-      <section id="last-fixtures">
+      <section id="last-fixtures" class="main-features">
         <h2>
           <i class="fas fa-history"></i> Latest Results
         </h2>
@@ -98,7 +105,7 @@
           </ul>
         </div>
       </section>
-      <section id="division-table">
+      <section id="division-table" class="main-features">
         <h2>
           <i class="fas fa-trophy"></i>
           <span id="division-table-name"></span> Division
@@ -142,16 +149,17 @@
     </div>
     <footer class="footer">
       <div class="github-container">
+        <p>
         <a href="https://github.com/jimmytricks/CanucksHockey" target="_blank">View on GitHub
           <span class="fab fa-github fa-lg"></span>
         </a>
+        </p>
       </div>
       <div class="central-footer">
         <p>DidYouWatchTheGame.com</p>
       </div>
       <div class="zu-container">
-        <p>Crafted in the ZU:
-          <a href="http://www.przu.com" target="_blank">PRZU.com</a>
+        <p>Crafted in the ZU: <a href="http://www.przu.com" target="_blank">PRZU.com</a>
         </p>
       </div>
     </footer>

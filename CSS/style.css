@@ -355,16 +355,16 @@ a {
   text-decoration: none;
 }
 
-section {
+section.main-features {
   padding: 20px 40px;
   min-width: 260px;
   flex-grow: 1;
   flex-basis: 33%;
 }
-section li {
+section.main-features li {
   list-style-type: none;
 }
-section h2 {
+section.main-features h2 {
   letter-spacing: 1.5px;
   padding-bottom: 5px;
   border-bottom: 5px solid rgba(255, 255, 255, 0.5);
@@ -374,7 +374,7 @@ section h2 {
   min-height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 50px auto 50px;
+  grid-template-rows: auto auto auto;
   grid-template-areas: "header header header" "main main main" "footer footer footer";
 }
 
@@ -390,14 +390,17 @@ section h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.header .logo {
-  position: absolute;
-  left: 40px;
+  justify-content: space-between;
+  padding: 5px 40px;
 }
 .header .logo img {
   height: 34px;
-  padding-top: 2px;
+  margin-right: 5px;
+}
+
+.header-title-container {
+  display: flex;
+  margin-left: 5px;
 }
 
 .header-subtitle, #current-team-name {
@@ -418,7 +421,7 @@ section h2 {
 .footer {
   grid-area: footer;
   background-color: #32292F;
-  padding: 5px 20px;
+  padding: 5px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -558,7 +561,7 @@ section h2 {
   text-align: left;
 }
 
-@media (max-width: 1201px) {
+@media (max-width: 1221px) {
   #next-fixture div {
     margin-bottom: 20px;
   }
@@ -568,15 +571,15 @@ section h2 {
     flex-direction: column;
   }
 
-  section {
-    padding: 20px 80px;
+  section.main-features {
+    padding: 20px 60px;
   }
 
-  .header .logo {
-    left: 80px;
+  .header {
+    padding: 5px 60px;
   }
 }
-@media (max-width: 521px) {
+@media (max-width: 540px) {
   #last-fixtures p.result-score {
     width: 110px;
   }
@@ -588,23 +591,33 @@ section h2 {
     font-size: 0.8rem;
   }
 
-  .header .logo {
-    display: none;
+  .footer {
+    flex-direction: column;
   }
 }
 @media (max-width: 421px) {
-  section {
+  section.main-features {
     padding: 20px 20px;
   }
 
+  .header {
+    padding: 20px 20px;
+  }
+
+  .header-subtitle, #current-team-name {
+    display: none;
+  }
+
   #division-table ul li {
-    min-width: 18px;
+    font-size: 0.8rem;
+    min-width: 24px;
+    padding: 5px 2px;
   }
   #division-table ul li:first-child {
     min-width: 15px;
   }
   #division-table ul li:nth-child(2) {
-    width: 140px;
+    min-width: 140px;
   }
 }
 
