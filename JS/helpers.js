@@ -42,6 +42,27 @@ function getCurrentDateForUrlPlusOneYear() {
 }
 
 /**
+ * Returns the current date minus one year in the format yyyy-dd-mm
+ *
+ * @returns {string}
+ */
+function getCurrentDateForUrlMinusOneYear() {
+    const now = new Date();
+    let dd = now.getDate();
+    let mm = now.getMonth() + 1; // January is 0!
+    const yyyy = now.getFullYear() - 1;
+
+    // Add leading zeros if day or month is below 10
+    if (dd < 10) {
+        dd = `0${dd}`;
+    }
+    if (mm < 10) {
+        mm = `0${mm}`;
+    }
+    return `${yyyy}-${mm}-${dd}`;
+}
+
+/**
  * Format date ISO string to a human readable string
  *
  * @param {String} date - ISO Date string (e.g. "2018-09-19T02:30:00Z")

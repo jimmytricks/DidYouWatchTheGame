@@ -48,8 +48,8 @@ function getLatestFixtures(teamID) {
   // set date to today's date
   const dateToday = getCurrentDateForUrl();
 
-    // set future date to a year in advance
-    const dateTodayPlusOneYear = getCurrentDateForUrlPlusOneYear();
+  // set future date to a year in advance
+  const dateTodayPlusOneYear = getCurrentDateForUrlPlusOneYear();
 
   // create url object with path and get parameters
   const fixturesURL = {
@@ -154,7 +154,7 @@ function getLatestResults(teamID) {
   const dateToday = getCurrentDateForUrl();
 
   // set future date to a year in advance
-  const dateTodayPlusOneYear = getCurrentDateForUrlPlusOneYear();
+  const dateTodayMinusOneYear = getCurrentDateForUrlMinusOneYear();
 
 
   // create url object with path and get parameters
@@ -164,7 +164,7 @@ function getLatestResults(teamID) {
       }`,
     params: {
       teamId: teamID,
-      startDate: "2018-01-01",
+      startDate: dateTodayMinusOneYear,
       endDate: dateToday
     }
   };
