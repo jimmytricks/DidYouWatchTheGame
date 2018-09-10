@@ -1,6 +1,6 @@
 # Description
 
-Single page application that utilizes the NHL REST API to show the Canucks upcoming fixtures, previous results and higlights, and the current standing of the Pacific NHL table. 
+Single page application that utilizes the NHL REST API to show the Canucks upcoming fixtures, previous results and higlights, and the current standing of the relevant regional NHL table. 
 
 # Built with
 
@@ -15,8 +15,9 @@ AJAX XMLHttpRequests to the NHL API to get information on Upcoming Fixtures, Pre
 
 # Roadmap
 
-- Create interactive feature to switch between multiple NHL Teams
-- Add dynamic colours depending on teams
+- Date function to show in browsers time
+- Function to check if highlights / results are ready
+- Add customizable colours
 
 
 # Credits
