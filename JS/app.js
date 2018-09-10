@@ -198,6 +198,7 @@ function getHighlights(highlights, index) {
   fetchJSON(contentLinkUrl, onRequestedHighlightsResponse);
 }
 
+// get the right division information and set team name to the DOM title
 function getDivisionTableAndSetTeamName(teamID) {
   function onRequestedDivisionTableResponse(divisionTableObject) {
     let divisionNumber;
