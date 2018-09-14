@@ -588,6 +588,7 @@ section.main-features h2 {
   #last-fixtures a {
     width: 110px;
     font-size: 0.8rem;
+    line-height: 1.5;
   }
 
   .footer {
