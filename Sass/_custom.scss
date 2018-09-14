@@ -19,7 +19,7 @@ a {
 
 section.main-features {
     padding:20px 40px;
-    min-width:260px;
+    min-width:240px;
     flex-grow:1;
     flex-basis:33%;
     li {
@@ -37,7 +37,7 @@ section.main-features {
     min-height:100%;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 50px auto 50px;
     grid-template-areas:
     "header header header"
     "main main main"
@@ -298,16 +298,20 @@ section.main-features {
     }
     #division-table ul {
         li {
+            min-width:18px;
             font-size:0.8rem;
-            min-width: 24px;
             padding: 5px 2px;
             &:first-child {
                 min-width: 15px;
             }
             &:nth-child(2){
-                min-width:140px;
+                width:140px;
             }
         }
     }
     
 }
+
+// .wrapper {
+//     grid-template-rows: 50px auto 50px;
+// }

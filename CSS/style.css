@@ -357,7 +357,7 @@ a {
 
 section.main-features {
   padding: 20px 40px;
-  min-width: 260px;
+  min-width: 240px;
   flex-grow: 1;
   flex-basis: 33%;
 }
@@ -374,7 +374,7 @@ section.main-features h2 {
   min-height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 50px auto 50px;
   grid-template-areas: "header header header" "main main main" "footer footer footer";
 }
 
@@ -609,16 +609,16 @@ section.main-features h2 {
   }
 
   #division-table ul li {
+    min-width: 18px;
     font-size: 0.8rem;
-    min-width: 24px;
     padding: 5px 2px;
   }
   #division-table ul li:first-child {
     min-width: 15px;
   }
   #division-table ul li:nth-child(2) {
-    min-width: 140px;
+    width: 140px;
   }
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=CSS/style.css.map */
