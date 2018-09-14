@@ -249,14 +249,10 @@ section.main-features {
 
 // Media queries
 
-@media (max-width: 1221px) {
+@media (max-width: 1301px) {
     #next-fixture div {
         margin-bottom:20px;
     }
-}
-
-
-@media (max-width: 1081px) {
     .container {
         flex-direction:column;
     }
@@ -283,6 +279,9 @@ section.main-features {
     }
     .footer {
         flex-direction: column;
+    }
+    .wrapper {
+        grid-template-rows: 50px auto 160px;
     }
 }
 
@@ -312,6 +311,3 @@ section.main-features {
     
 }
 
-// .wrapper {
-//     grid-template-rows: 50px auto 50px;
-// }

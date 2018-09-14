@@ -561,12 +561,11 @@ section.main-features h2 {
   text-align: left;
 }
 
-@media (max-width: 1221px) {
+@media (max-width: 1301px) {
   #next-fixture div {
     margin-bottom: 20px;
   }
-}
-@media (max-width: 1081px) {
+
   .container {
     flex-direction: column;
   }
@@ -593,6 +592,10 @@ section.main-features h2 {
 
   .footer {
     flex-direction: column;
+  }
+
+  .wrapper {
+    grid-template-rows: 50px auto 160px;
   }
 }
 @media (max-width: 421px) {
