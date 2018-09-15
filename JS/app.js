@@ -176,26 +176,44 @@ function getLatestResults(teamID) {
 // get highlights from last results
 function getHighlights(highlights, index) {
   function onRequestedHighlightsResponse(highlightObject) {
-    // get link
-    const extendedHighlightLink =
-      highlightObject.media.epg[2].items[0].playbacks[9].url;
 
-    // create a link element to hold highlight URL
-    const a = createElementWithText("a", "View Highlights");
-    a.title = "View game highlights";
-    a.setAttribute("target", "_blank");
-    a.href = extendedHighlightLink;
+    // check if fetch was unsuccessful, meaning highlight has loaded
+    if (highlightObject.messageNumber === 10 ){
 
-    // add the a element to container with correct score
-    const highlightContainerNodeIDString = `score-highlight-container-${index}`;
-    document.getElementById(highlightContainerNodeIDString).appendChild(a);
+        const a = createElementWithText("p", "Highlights TBA");
+        a.title = "Game Highlights Not Yet Available";
+        a.setAttribute("class", "tba-highlight");
+
+        // add the a element to container with correct score
+        const highlightContainerNodeIDString = `score-highlight-container-${index}`;
+        document.getElementById(highlightContainerNodeIDString).appendChild(a);
+    } else {
+    
+      // get link
+      const extendedHighlightLink =
+        highlightObject.media.epg[2].items[0].playbacks[9].url;
+
+      // create a link element to hold highlight URL
+      const a = createElementWithText("a", "View Highlights");
+      a.title = "View game highlights";
+      a.setAttribute("target", "_blank");
+      a.href = extendedHighlightLink;
+
+      // add the a element to container with correct score
+      const highlightContainerNodeIDString = `score-highlight-container-${index}`;
+      document.getElementById(highlightContainerNodeIDString).appendChild(a);
+    }
   }
 
   // access api link containing highlights info
   const contentLinkUrl = CONFIG.API_URL + highlights["content"]["link"];
 
+  // // test invalid game
+  // fetchJSONException('https://statsapi.web.nhl.com//api/v1/game/2018010011/content', onRequestedHighlightsResponse);
+
+
   // Get content from API and process
-  fetchJSON(contentLinkUrl, onRequestedHighlightsResponse);
+  fetchJSONException(contentLinkUrl, onRequestedHighlightsResponse);
 }
 
 // get the right division information and set team name to the DOM title
