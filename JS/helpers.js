@@ -151,25 +151,6 @@ function fetchJSON(url, callback) {
 }
 
 /**
- * Perform fetch of a provided URL
- * Executes callback function on completion, no validation is used
- *
- * @param {string} urlString - URL of data to get
- * @param {function} callback - Callback function to be called upon success
- */
-function fetchJSONException(url, callback) {
-    if (typeof url !== "string") {
-        // if url is not a string, instead it is an object which combines path and params
-        url = getUrlWithParams(url.path, url.params);
-    }
-    fetch(url)
-        .then(validateResponse)
-        .then(readResponseAsJSON)
-        .then(callback)
-        .catch(logError);
-}
-
-/**
  * Create an element and append a text node
  *
  * @param {string} tagName - Element tag name
