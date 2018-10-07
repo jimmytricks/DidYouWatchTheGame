@@ -72,6 +72,7 @@ function getLatestResults(teamID) {
     function createLatestResult(game, index) {
       const gameDateFormatted = formatDateToString(game.gameDate);
 
+      // get game state
       let getGameState = game.status.detailedState;
 
       // if game hasn't started yet
@@ -87,9 +88,11 @@ function getLatestResults(teamID) {
         if (getGameState === "In Progress") {
           console.log('in progress')
           createScoringString();
+          createScoringElements();
           // Show in progress, add an in progress var to use later?
         } else {
           createScoringString();
+          createScoringElements();
           console.log('Final')
         }
 
@@ -99,7 +102,7 @@ function getLatestResults(teamID) {
         const hockeyTeamID = game.teams.home.team.id;
         const homeTeamScore = game.teams.home.score;
         const awayTeamScore = game.teams.away.score;
-
+        
         // check for a draw
         if (homeTeamScore === awayTeamScore) {
           textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
@@ -129,36 +132,38 @@ function getLatestResults(teamID) {
           }`;
       }
 
+      function createScoringElements() {
+        // create paragraph elements with text
+        const pNode = createElementWithText("p", gameDateFormatted);
+        const pNodeFixture = createElementWithText("p", textStringFixture);
+        const pNodeResult = createElementWithText("p", textStringResult);
 
-      // create paragraph elements with text
-      const pNode = createElementWithText("p", gameDateFormatted);
-      const pNodeFixture = createElementWithText("p", textStringFixture);
-      const pNodeResult = createElementWithText("p", textStringResult);
+        // add class to score element for styling
+        pNodeResult.classList.add("result-score");
 
-      // add class to score element for styling
-      pNodeResult.classList.add("result-score");
+        //create container div for result and score, add ID + class and append result to it
+        const scoreAndHighlightContainer = document.createElement("div");
+        const uniqueContainerID = `score-highlight-container-${index}`;
+        const uniqueContainerClass = `score-highlight-container`;
+        scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
+        scoreAndHighlightContainer.setAttribute("class", uniqueContainerClass)
+        scoreAndHighlightContainer.appendChild(pNodeResult);
 
-      //create container div for result and score, add ID + class and append result to it
-      const scoreAndHighlightContainer = document.createElement("div");
-      const uniqueContainerID = `score-highlight-container-${index}`;
-      const uniqueContainerClass = `score-highlight-container`;
-      scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
-      scoreAndHighlightContainer.setAttribute("class", uniqueContainerClass)
-      scoreAndHighlightContainer.appendChild(pNodeResult);
+        // create container li
+        const gameContainerNode = document.createElement("li");
 
-      // create container li
-      const gameContainerNode = document.createElement("li");
+        // append paragraph elements to container li and add to page
+        gameContainerNode.appendChild(pNode);
+        gameContainerNode.appendChild(pNodeFixture);
+        gameContainerNode.appendChild(scoreAndHighlightContainer);
 
-      // append paragraph elements to container li and add to page
-      gameContainerNode.appendChild(pNode);
-      gameContainerNode.appendChild(pNodeFixture);
-      gameContainerNode.appendChild(scoreAndHighlightContainer);
+        // add to dynamic html ID using index, then append to LI element
+        const gameContainerNodeIDString = `last-fixture-${index}`;
+        document
+          .getElementById(gameContainerNodeIDString)
+          .appendChild(gameContainerNode);
 
-      // add to dynamic html ID using index, then append to LI element
-      const gameContainerNodeIDString = `last-fixture-${index}`;
-      document
-        .getElementById(gameContainerNodeIDString)
-        .appendChild(gameContainerNode);
+      }
     }
 
     // get the the last 4 games
