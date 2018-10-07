@@ -72,38 +72,63 @@ function getLatestResults(teamID) {
     function createLatestResult(game, index) {
       const gameDateFormatted = formatDateToString(game.gameDate);
 
-      let textStringResult = "";
-      const hockeyTeamID = game.teams.home.team.id;
-      const homeTeamScore = game.teams.home.score;
-      const awayTeamScore = game.teams.away.score;
+      let getGameState = game.status.detailedState;
 
-      // check for a draw
-      if (homeTeamScore === awayTeamScore) {
-        textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
-      } else {
-
-        // check if home team is the current team
-        if (hockeyTeamID == teamID) {
-          // if current team home score more than away, prefix with win if not loss
-          if (homeTeamScore > awayTeamScore) {
-            textStringResult = `Win ${homeTeamScore} - ${awayTeamScore}`;
-          } else {
-            textStringResult = `Loss ${homeTeamScore} - ${awayTeamScore}`;
-          }
-          // if current team are away team
+      // if game hasn't started yet
+      if (getGameState === "Scheduled" || getGameState === "Pre-Game") {
+        if (getGameState === "Scheduled") {
+          console.log('scheduled')
         } else {
-          // prefix with win if higher score, if not loss
-          if (homeTeamScore < awayTeamScore) {
-            textStringResult = `Win ${awayTeamScore} - ${homeTeamScore}`;
+          console.log('Pre Game')
+        }
+        // code to execute
+
+      } else {
+        if (getGameState === "In Progress") {
+          console.log('in progress')
+          createScoringString();
+          // Show in progress, add an in progress var to use later?
+        } else {
+          createScoringString();
+          console.log('Final')
+        }
+
+        let = textStringFixture, textStringResult;
+      }
+      function createScoringString() {
+        const hockeyTeamID = game.teams.home.team.id;
+        const homeTeamScore = game.teams.home.score;
+        const awayTeamScore = game.teams.away.score;
+
+        // check for a draw
+        if (homeTeamScore === awayTeamScore) {
+          textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
+        } else {
+
+          // check if home team is the current team
+          if (hockeyTeamID == teamID) {
+            // if current team home score more than away, prefix with win if not loss
+            if (homeTeamScore > awayTeamScore) {
+              textStringResult = `Win ${homeTeamScore} - ${awayTeamScore}`;
+            } else {
+              textStringResult = `Loss ${homeTeamScore} - ${awayTeamScore}`;
+            }
+            // if current team are away team
           } else {
-            textStringResult = `Loss ${awayTeamScore} - ${homeTeamScore}`;
+            // prefix with win if higher score, if not loss
+            if (homeTeamScore < awayTeamScore) {
+              textStringResult = `Win ${awayTeamScore} - ${homeTeamScore}`;
+            } else {
+              textStringResult = `Loss ${awayTeamScore} - ${homeTeamScore}`;
+            }
           }
         }
+
+        textStringFixture = `${game.teams.home.team.name} vs ${
+          game.teams.away.team.name
+          }`;
       }
 
-      const textStringFixture = `${game.teams.home.team.name} vs ${
-        game.teams.away.team.name
-        }`;
 
       // create paragraph elements with text
       const pNode = createElementWithText("p", gameDateFormatted);
