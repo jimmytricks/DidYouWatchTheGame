@@ -176,28 +176,29 @@ function getLatestResults(teamID) {
 // get highlights from last results
 function getHighlights(highlights, index) {
   function onRequestedHighlightsResponse(highlightObject) {
+    debugger;
 
-    // check if fetch was unsuccessful, meaning highlight has loaded
-    if (highlightObject.messageNumber === 10 ){
+    let eachGame = highlightObject.media.epg[2];
 
-        const a = createElementWithText("p", "Highlights TBA");
-        a.title = "Game Highlights Not Yet Available";
-        a.setAttribute("class", "tba-highlight");
+    if (!eachGame.items.length > 0){
+   console.log('exception')
+   const a = createElementWithText("p", "Highlights TBA");
+   a.title = "Game Highlights Not Yet Available";
+   a.setAttribute("class", "tba-highlight");
 
-        // add the a element to container with correct score
-        const highlightContainerNodeIDString = `score-highlight-container-${index}`;
-        document.getElementById(highlightContainerNodeIDString).appendChild(a);
+   // add the a element to container with correct score
+   const highlightContainerNodeIDString = `score-highlight-container-${index}`;
+   document.getElementById(highlightContainerNodeIDString).appendChild(a);
     } else {
-    
-      // get link
-      const extendedHighlightLink =
-        highlightObject.media.epg[2].items[0].playbacks[9].url;
+
+      let extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
 
       // create a link element to hold highlight URL
       const a = createElementWithText("a", "View Highlights");
       a.title = "View game highlights";
       a.setAttribute("target", "_blank");
       a.href = extendedHighlightLink;
+      
 
       // add the a element to container with correct score
       const highlightContainerNodeIDString = `score-highlight-container-${index}`;

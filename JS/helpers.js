@@ -163,6 +163,7 @@ function fetchJSONException(url, callback) {
         url = getUrlWithParams(url.path, url.params);
     }
     fetch(url)
+        .then(validateResponse)
         .then(readResponseAsJSON)
         .then(callback)
         .catch(logError);
