@@ -160,7 +160,6 @@ function getLatestResults(teamID) {
         // if pregame or scheduled, amend text
         if (preGame == true || scheduled == true || inProgress == true ){
           if (preGame == true){
-            // set after psuedo element of id score-highlight- p.result-score :: after to text
             scoreAndHighlightContainer.setAttribute("class", 'score-highlight-container pregame-exception')
           } else if (scheduled == true ) {
             scoreAndHighlightContainer.setAttribute("class", 'score-highlight-container scheduled-exception')

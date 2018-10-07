@@ -518,12 +518,27 @@ section.main-features h2 {
 }
 #last-fixtures .scheduled-exception p.result-score::after {
   content: "Game Day!";
+  background-color: var(--primary-team-colour);
 }
 #last-fixtures .inprogress-exception p.result-score::after {
   content: "Match Live";
+  background-color: var(--primary-team-colour);
 }
-#last-fixtures .scheduled-exception p.result-score::after {
+#last-fixtures .pregame-exception p.result-score::after {
   content: "Pre Game";
+  background-color: var(--primary-team-colour);
+}
+#last-fixtures .tba-highlight {
+  width: 150px;
+  text-align: center;
+  padding: 8px;
+  margin: 0;
+  background-color: var(--secondary-team-colour);
+  opacity: 0.5;
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 300 !important;
 }
 
 .score-highlight-container {
