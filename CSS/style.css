@@ -516,6 +516,15 @@ section.main-features h2 {
   position: relative;
   padding-left: 0px;
 }
+#last-fixtures .scheduled-exception p.result-score::after {
+  content: "Game Day!";
+}
+#last-fixtures .inprogress-exception p.result-score::after {
+  content: "Match Live";
+}
+#last-fixtures .scheduled-exception p.result-score::after {
+  content: "Pre Game";
+}
 
 .score-highlight-container {
   display: flex;
@@ -625,4 +634,4 @@ section.main-features h2 {
   }
 }
 
-/*# sourceMappingURL=CSS/style.css.map */
+/*# sourceMappingURL=style.css.map */

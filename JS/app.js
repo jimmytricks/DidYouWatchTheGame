@@ -74,12 +74,19 @@ function getLatestResults(teamID) {
 
       // get game state
       let getGameState = game.status.detailedState;
+      let scheduled, preGame, inProgress = false;
 
       // if game hasn't started yet
       if (getGameState === "Scheduled" || getGameState === "Pre-Game") {
         if (getGameState === "Scheduled") {
-          console.log('scheduled')
+          scheduled = true;
+          createScoringString();
+          createScoringElements();
+          console.log('Scheduled')
         } else {
+          preGame = true;
+          createScoringString();
+          createScoringElements();
           console.log('Pre Game')
         }
         // code to execute
@@ -87,9 +94,10 @@ function getLatestResults(teamID) {
       } else {
         if (getGameState === "In Progress") {
           console.log('in progress')
+          inProgress = true;
           createScoringString();
           createScoringElements();
-          // Show in progress, add an in progress var to use later?
+
         } else {
           createScoringString();
           createScoringElements();
@@ -102,7 +110,7 @@ function getLatestResults(teamID) {
         const hockeyTeamID = game.teams.home.team.id;
         const homeTeamScore = game.teams.home.score;
         const awayTeamScore = game.teams.away.score;
-        
+
         // check for a draw
         if (homeTeamScore === awayTeamScore) {
           textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
@@ -148,6 +156,18 @@ function getLatestResults(teamID) {
         scoreAndHighlightContainer.setAttribute("id", uniqueContainerID);
         scoreAndHighlightContainer.setAttribute("class", uniqueContainerClass)
         scoreAndHighlightContainer.appendChild(pNodeResult);
+
+        // if pregame or scheduled, amend text
+        if (preGame == true || scheduled == true || inProgress == true ){
+          if (preGame == true){
+            // set after psuedo element of id score-highlight- p.result-score :: after to text
+            scoreAndHighlightContainer.setAttribute("class", 'score-highlight-container pregame-exception')
+          } else if (scheduled == true ) {
+            scoreAndHighlightContainer.setAttribute("class", 'score-highlight-container scheduled-exception')
+          } else if (inProgress == true) {
+            scoreAndHighlightContainer.setAttribute("class", 'score-highlight-container inprogress-exception')
+          }
+        }
 
         // create container li
         const gameContainerNode = document.createElement("li");

@@ -197,6 +197,16 @@ section.main-features {
         position:relative;
         padding-left:0px;
     }
+    // Override view score if in play, scheduled or pregame
+    .scheduled-exception p.result-score::after {
+        content:'Game Day!';
+    } 
+    .inprogress-exception p.result-score::after {
+        content:'Match Live';
+    } 
+    .scheduled-exception p.result-score::after {
+        content:'Pre Game';
+    } 
 }
 
 
