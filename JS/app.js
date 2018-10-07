@@ -78,7 +78,6 @@ function getLatestResults(teamID) {
       const awayTeamScore = game.teams.away.score;
 
       // check for a draw
-      debugger;
       if (homeTeamScore === awayTeamScore) {
         textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
       } else {
