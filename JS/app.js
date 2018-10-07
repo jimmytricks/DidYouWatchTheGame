@@ -78,25 +78,27 @@ function getLatestResults(teamID) {
       const awayTeamScore = game.teams.away.score;
 
       // check for a draw
+      debugger;
       if (homeTeamScore === awayTeamScore) {
         textStringResult = "Draw " + homeTeamScore + " - " + awayTeamScore;
-      }
-
-      // check if home team is the current team
-      if (hockeyTeamID == teamID) {
-        // if current team home score more than away, prefix with win if not loss
-        if (homeTeamScore > awayTeamScore) {
-          textStringResult = `Win ${homeTeamScore} - ${awayTeamScore}`;
-        } else {
-          textStringResult = `Loss ${homeTeamScore} - ${awayTeamScore}`;
-        }
-        // if current team are away team
       } else {
-        // prefix with win if higher score, if not loss
-        if (homeTeamScore < awayTeamScore) {
-          textStringResult = `Win ${awayTeamScore} - ${homeTeamScore}`;
+
+        // check if home team is the current team
+        if (hockeyTeamID == teamID) {
+          // if current team home score more than away, prefix with win if not loss
+          if (homeTeamScore > awayTeamScore) {
+            textStringResult = `Win ${homeTeamScore} - ${awayTeamScore}`;
+          } else {
+            textStringResult = `Loss ${homeTeamScore} - ${awayTeamScore}`;
+          }
+          // if current team are away team
         } else {
-          textStringResult = `Loss ${awayTeamScore} - ${homeTeamScore}`;
+          // prefix with win if higher score, if not loss
+          if (homeTeamScore < awayTeamScore) {
+            textStringResult = `Win ${awayTeamScore} - ${homeTeamScore}`;
+          } else {
+            textStringResult = `Loss ${awayTeamScore} - ${homeTeamScore}`;
+          }
         }
       }
 
@@ -179,8 +181,8 @@ function getHighlights(highlights, index) {
 
     let eachGame = highlightObject.media.epg[2];
 
+    // check to see if the game has an items array with a length, if not it means highlights not currently available
     if (!eachGame.items.length > 0) {
-      console.log('exception')
       const a = createElementWithText("p", "Highlights TBA");
       a.title = "Game Highlights Not Yet Available";
       a.setAttribute("class", "tba-highlight");
