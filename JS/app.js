@@ -209,10 +209,6 @@ function getHighlights(highlights, index) {
   // access api link containing highlights info
   const contentLinkUrl = CONFIG.API_URL + highlights["content"]["link"];
 
-  // // test invalid game
-  // fetchJSONException('https://statsapi.web.nhl.com//api/v1/game/2018010011/content', onRequestedHighlightsResponse);
-
-
   // Get content from API and process
   fetchJSON(contentLinkUrl, onRequestedHighlightsResponse);
 }
