@@ -26,8 +26,9 @@ function getLatestFixtures(teamID) {
       const pNode = createElementWithText("p", gameDateFormatted);
       const pNodeFixture = createElementWithText("p", textStringFixture);
 
-      // create container div
+      // create container div, add class
       const gameContainerNode = document.createElement("div");
+      gameContainerNode.classList.add('fixture-container');
 
       // append paragraph elements to container div
       appendChildrenToElement(gameContainerNode, [pNode, pNodeFixture]);
@@ -368,6 +369,17 @@ function setSelectID(teamID) {
   document.getElementById("team-selector").value = teamID;
 }
 
+// reset the DOM ready for next team load
+function resetDOM() {
+  function resetFixtures(){
+    let nodes = document.getElementsByClassName('fixture-container');
+    while(nodes[0]) {
+        nodes[0].parentNode.removeChild(nodes[0]);
+    }
+  }
+  resetFixtures();
+}
+
 // Initialise the app
 function init() {
   // set team ID to select option's value
@@ -412,7 +424,7 @@ function runApp(teamID) {
 
 // if select is used, reload page and run as usual
 function initSelect() {
-  location.reload();
+  resetDOM();
   init();
 }
 
