@@ -83,18 +83,15 @@ function getLatestResults(teamID) {
           scheduled = true;
           createScoringString();
           createScoringElements();
-          console.log('Scheduled')
         } else {
           preGame = true;
           createScoringString();
           createScoringElements();
-          console.log('Pre Game')
         }
         // code to execute
 
       } else {
         if (getGameState === "In Progress") {
-          console.log('in progress')
           inProgress = true;
           createScoringString();
           createScoringElements();
@@ -102,7 +99,6 @@ function getLatestResults(teamID) {
         } else {
           createScoringString();
           createScoringElements();
-          console.log('Final')
         }
 
         let = textStringFixture, textStringResult;
