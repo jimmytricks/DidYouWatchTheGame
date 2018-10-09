@@ -371,12 +371,19 @@ function setSelectID(teamID) {
 
 // reset the DOM ready for next team load
 function resetDOM() {
+
   function resetFixtures(){
-    let nodes = document.getElementsByClassName('fixture-container');
-    while(nodes[0]) {
-        nodes[0].parentNode.removeChild(nodes[0]);
-    }
+
+    deleteNodeByClassName('fixture-container');
+    // let nodes = document.getElementsByClassName('fixture-container');
+    // while(nodes[0]) {
+    //     nodes[0].parentNode.removeChild(nodes[0]);
+    // }
   }
+
+  // function resetResults(){}
+
+
   resetFixtures();
 }
 

@@ -190,13 +190,15 @@ function convertHashToID(ID){
 }
 
 /**
- * Resets DOM info
+ * Delete the node
  *
 */
-function resetInfo (){
-    location.reload();
-}
-
+function deleteNodeByClassName(nodeClassName){
+    let nodes = document.getElementsByClassName(nodeClassName);
+    while(nodes[0]) {
+        nodes[0].parentNode.removeChild(nodes[0]);
+    }
+  }
 /**
  * Update team colours
  *
