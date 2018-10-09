@@ -77,6 +77,7 @@ function getLatestResults(teamID) {
       let getGameState = game.status.detailedState;
       let scheduled, preGame, inProgress = false;
 
+      debugger;
       // if game hasn't started yet
       if (getGameState === "Scheduled" || getGameState === "Pre-Game") {
         if (getGameState === "Scheduled") {
@@ -91,7 +92,8 @@ function getLatestResults(teamID) {
         // code to execute
 
       } else {
-        if (getGameState === "In Progress") {
+      
+        if (getGameState === "In Progress" || getGameState === "In Progress - Critical" ) {
           inProgress = true;
           createScoringString();
           createScoringElements();
