@@ -612,7 +612,12 @@ section.main-features h2 {
   #last-fixtures a {
     width: 110px;
     font-size: 0.8rem;
-    line-height: 1.5;
+    line-height: 1.4;
+  }
+  #last-fixtures .tba-highlight {
+    width: 110px;
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
 
   .footer {

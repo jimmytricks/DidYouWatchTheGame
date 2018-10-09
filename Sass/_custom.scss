@@ -225,7 +225,6 @@ section.main-features {
     }
 }
 
-
 .score-highlight-container {
     display:flex;
 }
@@ -245,7 +244,6 @@ section.main-features {
 }
 
 #division-table {
-    // background-color:var(--secondary-team-colour);
     background-color:var(--secondary-team-colour);
     p, li {
         font-size:$font-size-smaller;
@@ -301,7 +299,12 @@ section.main-features {
         a {
             width: 110px;
             font-size:0.8rem;
-            line-height: 1.5;
+            line-height: 1.4;
+        }
+        .tba-highlight {
+            width: 110px;
+            font-size: 0.8rem;
+            line-height: 1.4;
         }
     }
     .footer {
