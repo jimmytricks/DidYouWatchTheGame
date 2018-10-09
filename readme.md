@@ -23,7 +23,7 @@ AJAX XMLHttpRequests to the NHL API to get information on Upcoming Fixtures, Pre
 
 # Roadmap
 
-- TBA
+- Bookmarking teams / be able to save team preference for next view
 
 # Credits
 
