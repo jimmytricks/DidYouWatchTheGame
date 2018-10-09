@@ -307,8 +307,7 @@ function getDivisionTableAndSetTeamName(teamID) {
 
       // check if team is the current selected team, add class to parent UL element for styling, also set title to correct team name
       if (divisionTeams[i].team.id == teamID) {
-        document.getElementById(divisionTableStandingIDString).className =
-          "currentteam-standing";
+        document.getElementById(divisionTableStandingIDString).className = "currentteam-standing";
 
         // set team name in DOM title              
         document.title = `${CONFIG.ELEMENTS.TITLE_PRE_TEXT} ${divisionTeams[i].team.name} ${CONFIG.ELEMENTS.TITLE_POST_TEXT}`;
@@ -379,6 +378,10 @@ function resetDOM() {
 
   function resetTable(){
     deleteNodeByClassName('league-stats');
+
+    // remove the current team class fr highlighting in table
+    var removeClassCurrentTeam = document.getElementsByClassName('currentteam-standing');
+    removeClassCurrentTeam[0].classList.remove('currentteam-standing');
   }
 
   resetFixtures();
