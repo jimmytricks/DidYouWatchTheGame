@@ -171,6 +171,7 @@ function getLatestResults(teamID) {
 
         // create container li
         const gameContainerNode = document.createElement("li");
+        gameContainerNode.classList.add('result-container');
 
         // append paragraph elements to container li and add to page
         gameContainerNode.appendChild(pNode);
@@ -293,12 +294,11 @@ function getDivisionTableAndSetTeamName(teamID) {
     }
     checkWhichDivision(teamID, divisionTableObject.records);
 
-    const divisionTeams =
-      divisionTableObject.records[divisionNumber].teamRecords;
+    const divisionTeams = divisionTableObject.records[divisionNumber].teamRecords;
     for (let i = 0; i < divisionTeams.length; i++) {
       // create list node and text, append text to node
-      const divisionTeamNameListItem = createElementWithText(
-        "li", divisionTeams[i].team.name);
+      const divisionTeamNameListItem = createElementWithText("li", divisionTeams[i].team.name);
+      divisionTeamNameListItem.classList.add('league-stats');
 
       // create string to grab league placing IDS
       const divisionTableStandingIDString = `division-table-${i + 1}`;
@@ -317,10 +317,8 @@ function getDivisionTableAndSetTeamName(teamID) {
       // add league points to standing table
       function addLeaguePoints(leaguePoints) {
         // create list node and text, append text to node
-        const divisionTeamPointsListItem = createElementWithText(
-          "li",
-          divisionTeams[i][leaguePoints]
-        );
+        const divisionTeamPointsListItem = createElementWithText("li",divisionTeams[i][leaguePoints]);
+        divisionTeamPointsListItem.classList.add('league-stats');
 
         // create string to grab league placing IDS
         const divisionTableStandingIDString = `division-table-${i + 1}`;
@@ -336,10 +334,9 @@ function getDivisionTableAndSetTeamName(teamID) {
       function addLeagueStats(leagueStats) {
         // create list node and text, append text to node
         const divisionTeamPointsListItem = document.createElement("li");
-        const divisionTeamPointsTextNode = document.createTextNode(
-          divisionTeams[i].leagueRecord[leagueStats]
-        );
+        const divisionTeamPointsTextNode = document.createTextNode(divisionTeams[i].leagueRecord[leagueStats]);
         divisionTeamPointsListItem.appendChild(divisionTeamPointsTextNode);
+        divisionTeamPointsListItem.classList.add('league-stats');
 
         // create string to grab league placing IDS
         const divisionTableStandingIDString = `division-table-${i + 1}`;
@@ -373,18 +370,20 @@ function setSelectID(teamID) {
 function resetDOM() {
 
   function resetFixtures(){
-
     deleteNodeByClassName('fixture-container');
-    // let nodes = document.getElementsByClassName('fixture-container');
-    // while(nodes[0]) {
-    //     nodes[0].parentNode.removeChild(nodes[0]);
-    // }
   }
 
-  // function resetResults(){}
+  function resetResults(){
+    deleteNodeByClassName('result-container');
+  }
 
+  function resetTable(){
+    deleteNodeByClassName('league-stats');
+  }
 
   resetFixtures();
+  resetResults();
+  resetTable();
 }
 
 // Initialise the app
