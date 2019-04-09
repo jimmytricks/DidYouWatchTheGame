@@ -37,13 +37,18 @@ function getLatestFixtures(teamID) {
       document.getElementById("next-fixture").appendChild(gameContainerNode);
     }
 
-    // get next 4 game fixtures
+    // get next 4 game fixtures, if no fixtures say message no upcoming fixtures
+    
+    if (nextGameObject.totalGames === 0) {
+      document.getElementById('no-fixtures').style.display = 'inline';
+    } else {
     const game1 = nextGameObject.dates["0"].games["0"];
     const game2 = nextGameObject.dates["1"].games["0"];
     const game3 = nextGameObject.dates["2"].games["0"];
     const game4 = nextGameObject.dates["3"].games["0"];
     const nextFourGames = [game1, game2, game3, game4];
     nextFourGames.forEach(createFixture);
+    }
   }
 
   // set date to today's date
@@ -188,6 +193,7 @@ function getLatestResults(teamID) {
     let lastFourGamesArray = lastGameObject.dates.slice(-4).reverse();
 
     // set game variables, run create game date function
+
     const game1 = lastFourGamesArray["0"].games["0"];
     const game2 = lastFourGamesArray["1"].games["0"];
     const game3 = lastFourGamesArray["2"].games["0"];
