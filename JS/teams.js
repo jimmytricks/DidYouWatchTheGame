@@ -200,6 +200,14 @@ const teams = [
         }
     },
     {
+        id: 55,
+        name: "Seattle Kraken",
+        league: "nhl",
+        colours: {
+            hex: ["008852", "002d55"]
+        }
+    },
+    {
         id: 14,
         name: "Tampa Bay Lightning",
         league: "nhl",

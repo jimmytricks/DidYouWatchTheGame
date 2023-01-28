@@ -246,7 +246,7 @@ function getHighlights(highlights, index) {
     } else {
 
       // URL of highlights
-      let extendedHighlightLink = highlightObject.media.epg[2].items[0].playbacks[9].url;
+      let extendedHighlightLink = highlightObject.media.epg[3].items[0].playbacks[3].url;
 
       // create a link element to hold highlight URL
       const a = createElementWithText("a", "View Highlights");
